@@ -158,4 +158,63 @@ hoyde <- hoyde %>%
 # Del 3 - Estimere modeller
 
 
+```{r}
+lm1 <- lm(income ~ height_cm, data = hoyde )
+lm2 <- lm(income ~ height_cm + weight_kg + education, data = hoyde)
+lm3 <- lm(income ~ height_cm + sex + age + education, data = hoyde)
+```
+
+```{r}
+summary(lm2)
+```
+
+```{r}
+library(huxtable)
+```
+
+## Redusert datasett
+
+
+```{r}
+# Legge til height_cm i redusert datasett (sample1)
+sample1 <- sample1 %>%
+  mutate(height_cm = height * 2.54)
+```
+
+```{r}
+# Legge til weight_kg i redusert datasett (sample1)
+sample1 <- sample1 %>%
+  mutate(weight_kg = weight *0.45)
+```
+
+```{r}
+# Legge til bmi i sample1
+sample1 <- sample1 %>%
+  mutate(sample1, bmi = weight_kg/(height_cm)^2)
+```
+
+```{r}
+# Legge til forenklet utgave av marrital i sample1
+sample1 <- sample1 %>%
+  mutate(
+    married = factor(
+      case_when(
+        marital == "married" ~ TRUE,
+        TRUE ~ FALSE
+      )
+    )
+  )
+```
+
+
+```{r}
+lm4 <- lm(income ~ height_cm, data = sample1)
+lm5 <- lm(income ~ height_cm + weight_kg + education, data = sample1)
+lm6 <- lm(income ~ height_cm + sex + age + education, data = sample1)
+```
+
+```{r}
+summary(lm5)
+```
+
 
