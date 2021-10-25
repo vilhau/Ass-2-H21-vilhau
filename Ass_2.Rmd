@@ -164,12 +164,27 @@ lm2 <- lm(income ~ height_cm + weight_kg + education, data = hoyde)
 lm3 <- lm(income ~ height_cm + sex + age + education, data = hoyde)
 ```
 
+## Test interaksjon
+
+```{r}
+m_educsex_i <- "income ~ education*sex"
+lm_educsex_i <- lm(m_educsex_i, data = hoyde)
+```
+
+```{r}
+summary(lm_educsex_i)
+```
+
 ```{r}
 summary(lm2)
 ```
 
 ```{r}
 library(huxtable)
+```
+
+```{r}
+huxreg(lm1, lm2, lm3)
 ```
 
 ## Redusert datasett
@@ -216,5 +231,53 @@ lm6 <- lm(income ~ height_cm + sex + age + education, data = sample1)
 ```{r}
 summary(lm5)
 ```
+
+```{r}
+huxreg(lm4, lm5, lm6)
+```
+
+```{r}
+huxreg(
+  list("Modell 1" = lm1, "Modell 4" = lm4),
+  error_format = "[{statistic}]",
+  note = "Regresjonstabell 1: {stars}. T statistics in brackets."
+)
+```
+
+```{r}
+huxreg(
+  list("Modell 2" = lm2, "Modell 5" = lm5),
+  error_format = "[{statistic}]",
+  note = "Regresjonstabell 2: {stars}. T statistics in brackets."
+)
+```
+
+```{r}
+huxreg(
+  list("Modell 3" = lm3, "Modell 6" = lm6),
+  error_format = "[{statistic}]",
+  note = "Regresjonstabell 3: {stars}. T statistics in brackets."
+)
+```
+
+## Interaksjon på redusert datasett
+
+```{r}
+m_educsex_i <- "income ~ education*sex"
+lm_educsex_iI <- lm(m_educsex_i, data = sample1)
+```
+
+```{r}
+summary(lm_educsex_iI)
+```
+
+```{r}
+library(car)
+```
+
+```{r}
+summary(lm6)
+```
+
 
 
