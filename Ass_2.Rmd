@@ -158,4 +158,126 @@ hoyde <- hoyde %>%
 # Del 3 - Estimere modeller
 
 
+```{r}
+lm1 <- lm(income ~ height_cm, data = hoyde )
+lm2 <- lm(income ~ height_cm + weight_kg + education, data = hoyde)
+lm3 <- lm(income ~ height_cm + sex + age + education, data = hoyde)
+```
+
+## Test interaksjon
+
+```{r}
+m_educsex_i <- "income ~ education*sex"
+lm_educsex_i <- lm(m_educsex_i, data = hoyde)
+```
+
+```{r}
+summary(lm_educsex_i)
+```
+
+```{r}
+summary(lm2)
+```
+
+```{r}
+library(huxtable)
+```
+
+```{r}
+huxreg(lm1, lm2, lm3)
+```
+
+## Redusert datasett
+
+
+```{r}
+# Legge til height_cm i redusert datasett (sample1)
+sample1 <- sample1 %>%
+  mutate(height_cm = height * 2.54)
+```
+
+```{r}
+# Legge til weight_kg i redusert datasett (sample1)
+sample1 <- sample1 %>%
+  mutate(weight_kg = weight *0.45)
+```
+
+```{r}
+# Legge til bmi i sample1
+sample1 <- sample1 %>%
+  mutate(sample1, bmi = weight_kg/(height_cm)^2)
+```
+
+```{r}
+# Legge til forenklet utgave av marrital i sample1
+sample1 <- sample1 %>%
+  mutate(
+    married = factor(
+      case_when(
+        marital == "married" ~ TRUE,
+        TRUE ~ FALSE
+      )
+    )
+  )
+```
+
+
+```{r}
+lm4 <- lm(income ~ height_cm, data = sample1)
+lm5 <- lm(income ~ height_cm + weight_kg + education, data = sample1)
+lm6 <- lm(income ~ height_cm + sex + age + education, data = sample1)
+```
+
+```{r}
+summary(lm5)
+```
+
+```{r}
+huxreg(lm4, lm5, lm6)
+```
+
+```{r}
+huxreg(
+  list("Modell 1" = lm1, "Modell 4" = lm4),
+  error_format = "[{statistic}]",
+  note = "Regresjonstabell 1: {stars}. T statistics in brackets."
+)
+```
+
+```{r}
+huxreg(
+  list("Modell 2" = lm2, "Modell 5" = lm5),
+  error_format = "[{statistic}]",
+  note = "Regresjonstabell 2: {stars}. T statistics in brackets."
+)
+```
+
+```{r}
+huxreg(
+  list("Modell 3" = lm3, "Modell 6" = lm6),
+  error_format = "[{statistic}]",
+  note = "Regresjonstabell 3: {stars}. T statistics in brackets."
+)
+```
+
+## Interaksjon på redusert datasett
+
+```{r}
+m_educsex_i <- "income ~ education*sex"
+lm_educsex_iI <- lm(m_educsex_i, data = sample1)
+```
+
+```{r}
+summary(lm_educsex_iI)
+```
+
+```{r}
+library(car)
+```
+
+```{r}
+summary(lm6)
+```
+
+
 
