@@ -150,85 +150,9 @@ summary(lm3)
 Videre fremkommer det at en kombinasjon av økning i høyde, vekt og BMI, også vil gi en økning i innekt.
 
 
-............................................
-## Redusere datasettet
-
-Med henhold til at vi har funnet ut at datasettet inneholder mange minimumsverdier på 0 og at maksimumsverdien på 343,830 utgjorde kun 2% av utvalget, skal vi fjerne disse verdiene for å kunne kjøre en endelig modell mot reduserte datasett. Dette gjør vi for å teste modellens robushet. 
-
-```{r}
-sample1=filter(hoyde,income!=0 & income!=343830)
-```
-
-Her har vi opprettet en ny model, under navnet *sample1*. For å sjekke om de riktige verdiene ble fjernet kan vi kjøre en ny summeringstabell.
-
-```{r}
-summary(sample1)
-```
-
-Her kan vi se at både minimums- og makismumsverdien har endret seg. Det nye datasettet inneholder også færre observasjoner:
-$$7006-143-1740=5123$$
-Ny $n=5123$ til datasettet *sample1*.
-
-## Mutering av eksisterende variabler fra imperial- til metric system
-
-Siden vi benytter oss av det metriske systemet i Norge og datasettet har brukt det imperiske, så ønsker vi å endre disse variablene. Variablene dette omhandler er *height* og *weight* som vi skal gjøre om til *height_cm* og *weight_kg*. Har funnet ut på nettet at en inch er 2.54 cm og en pund er ca. 0.45 kg.
-
-```{r}
-hoyde <- hoyde %>%
-  mutate(height_cm = height * 2.54)
-```
-
-- **Vi kan teste om muteringen av *height* fungerer ved å:**
-
-```{r}
-# Finne maksverdien av den nye variablen
-max(hoyde$height_cm)
-```
-
-```{r}
-# Vi kan sjekke at dette stemmer ved å se hva den høyeste i inches er
-max(hoyde$height)
-```
-
-```{r}
-# Og så gange med 2.54 som var overgangen fra inches til cm
-84*2.54
-```
-
-```{r}
-# Bruker samme fremgangsmåte for pund til kg
-hoyde <- hoyde %>%
-  mutate(weight_kg = weight *0.45)
-```
-
-Fra summeringstabellen til datasettet *hoyde* kan vi se at variablen *weight* har flere NA-verdier, altså verdier som ikke er tilgjengelige. Dersom man ønsker å finne ut hva for eksempel maksimumsverdien til *weight_kg* er må man skrive følgende:
-
-```{r}
-max(hoyde$weight_kg, na.rm = TRUE)
-```
-
-Vi putter inn $na.rm = TRUE$ slik at R utelater cellene med betegnelsen *NA* (Not available). Dette gjør at vi kun får cellene med tallverdier.
-
-Dersom man ønsker å finne ut om andre variabler også innehar verdier som er NA, kan vi skrive:
-
-```{r}
-# For å sjekke hvilke celler som har NA
-colSums(is.na(hoyde))
-```
-......................
-
-
-
-## Opprettelse av ny variabel BMI
-
-```{r}
-hoyde <- hoyde %>%
-  mutate(hoyde, bmi = weight_kg/(height_cm)^2)
-```
-
 ## Forenklet utgave av variablen martial
 
-Siden dummyvariabel *marital* innholdt hele 5 ulike faktorer, så ønsker vi å forenkle denne til enten "True" eller "False" for om individet er gift eller ikke-gift. 
+Siden dummyvariabel *marital* innholdt hele 5 ulike faktorer, så forenkles denne til enten "True" eller "False" for om individet er gift eller ikke-gift. 
 
 ```{r}
 hoyde <- hoyde %>%
@@ -242,14 +166,30 @@ hoyde <- hoyde %>%
   )
 ```
 
-# Del 3 - Estimere modeller
+```{r}
+huxreg(list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
+       error_format = "[{statistic}]",
+       note = "Regresjonstabell 3: {stars}. T statistics in brackets."
+       )
+```
+
 
 
 ```{r}
-lm1 <- lm(income ~ height_cm, data = hoyde, subset = complete.cases(hoyde))
-lm2 <- lm(income ~ height_cm + weight_kg + education, data = hoyde, subset = complete.cases(hoyde))
-lm3 <- lm(income ~ height_cm + sex + age + education, data = hoyde, subset = complete.cases(hoyde))
+mod4 <- "inntekt ~ sex*hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
+lm4 <- lm(mod4, data = hoyde)
+summary(lm4)
 ```
+
+```{r}
+mod5 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2)) + BMI + I(BMI^2)"
+lm5 <- lm(mod5, data = hoyde)
+summary(lm5)
+```
+
+
+
+
 
 ## Test interaksjon
 
