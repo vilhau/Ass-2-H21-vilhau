@@ -50,7 +50,7 @@ Til å begynne med lages tre nye variabler som settes til en metrisk standard.
 hoyde <- hoyde %>%
   mutate(inntekt = income * 8.42,
          hoyde_cm = height * 2.54,
-         vekt_kg = weight * 0, 454,
+         vekt_kg = weight * 0.454,
          BMI = vekt_kg / (hoyde_cm/100)^2)
 ```
 
@@ -65,13 +65,13 @@ ggplot(data = hoyde, aes(x = inntekt)) +
 - **Forklaring på utliggerne langt til høyre**
 
 Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt.
-For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen *income*.
+For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen *inntekt*.
 
 ```{r}
 summary(hoyde)
 ```
 
-Fra summeringstabellen ser vi at maksimumsverdien til variablen *income* er 343,830. Videre kan vi undersøke hvor mange av observasjonene
+Fra summeringstabellen ser vi at maksimumsverdien til variablen *inntekt* er 343,830. Videre kan vi undersøke hvor mange av observasjonene
 som innehar denne verdien.
 
 ```{r}
@@ -84,9 +84,24 @@ Totalt var det 7006 observasjoner og med hensyn til at 143 hadde maksimumsverdie
 (143/7006)*100
 ```
 
+Dersom datasettet reduseres for topp 2% høyeste inntekt og inntekt lik 0, ser histogrammet slik ut:
+
+```{r}
+hoyde_begr <- hoyde %>%
+  filter(inntekt < 1500000,
+         inntekt > 1)
+```
+
+```{r}
+ggplot(data = hoyde_begr, aes(x = inntekt)) + 
+  geom_histogram()
+```
+
 - **Har vi med personer uten inntekt i datasettet?**
 
-Ja. Datasettet inneholder observasjoner av en rekke individer uten inntekt. Dette kan vi enkelt observere ved å se på histogrammet på 0 langs x-aksen, hvor vi ser at frekvensen på denne verdien er $<1500$. Vi kan også benytte summeringstabellen fra tidligere og se på minimumsverdien til variablen *income* som er på 0. Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verdien, kan vi benytte følgende:
+Ja. Datasettet inneholder observasjoner av en rekke individer uten inntekt. Dette fremkommer av histogrammet til variabelen inntekt hvor $<1500$ er frekvensen til 0 langs x-aksen.
+Det fremkommer også av hoyde-summeringstabellen at minimumsverdien til inntekt-variabelen er 0.
+Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verdien, kan vi benytte følgende:
 
 ```{r}
 sum(hoyde$income == 0)
@@ -94,6 +109,48 @@ sum(hoyde$income == 0)
 
 # Del 2 - Regresjonsanalyse
 
+```{r}
+mod1 <- "inntekt ~ hoyde_cm"
+lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary (lm1)
+```
+
+Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med 1 cm. 
+Test:
+
+```{r}
+-1361001.0 + (10047.9 * 173)
+-1361001.0 + (10047.9 * 161)
+```
+
+```{r}
+mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
+lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
+```
+
+
+```{r}
+summary(lm2)
+```
+
+Fra regresjonsanalysen over ser man inntekt øker ved økt høyde, men synker ved økning i vekt. Dersom høyde økes med 1 cm og vekt samtidig øker med 1 kg, vil også inntekten øke. Dette skyldes at inntekten øker betydelig mer ved økning i høyde, enn den syker ved tilsvarende økning i vekt.
+
+```{r}
+mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
+lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary(lm3)
+```
+
+Videre fremkommer det at en kombinasjon av økning i høyde, vekt og BMI, også vil gi en økning i innekt.
+
+
+............................................
 ## Redusere datasettet
 
 Med henhold til at vi har funnet ut at datasettet inneholder mange minimumsverdier på 0 og at maksimumsverdien på 343,830 utgjorde kun 2% av utvalget, skal vi fjerne disse verdiene for å kunne kjøre en endelig modell mot reduserte datasett. Dette gjør vi for å teste modellens robushet. 
@@ -158,6 +215,9 @@ Dersom man ønsker å finne ut om andre variabler også innehar verdier som er N
 # For å sjekke hvilke celler som har NA
 colSums(is.na(hoyde))
 ```
+......................
+
+
 
 ## Opprettelse av ny variabel BMI
 

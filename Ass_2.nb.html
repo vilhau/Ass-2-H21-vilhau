@@ -265,6 +265,13 @@ hoyde &lt;- heights</code></pre>
 </ul>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaG95ZGUgPC0gaG95ZGUgJT4lXG4gIG11dGF0ZShpbm50ZWt0ID0gaW5jb21lICogOC40MixcbiAgICAgICAgIGhveWRlX2NtID0gaGVpZ2h0ICogMi41NCxcbiAgICAgICAgIHZla3Rfa2cgPSB3ZWlnaHQgKiAwLjQ1NCxcbiAgICAgICAgIEJNSSA9IHZla3Rfa2cgLyAoaG95ZGVfY20vMTAwKV4yKVxuYGBgIn0= -->
+<pre class="r"><code>hoyde &lt;- hoyde %&gt;%
+  mutate(inntekt = income * 8.42,
+         hoyde_cm = height * 2.54,
+         vekt_kg = weight * 0.454,
+         BMI = vekt_kg / (hoyde_cm/100)^2)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
@@ -295,13 +302,13 @@ position_stack </code></pre>
 <ul>
 <li><strong>Forklaring på utliggerne langt til høyre</strong></li>
 </ul>
-<p>Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt. For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen <em>income</em>.</p>
+<p>Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt. For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen <em>inntekt</em>.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShob3lkZSlcbmBgYCJ9 -->
 <pre class="r"><code>summary(hoyde)</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiICAgICBpbmNvbWUgICAgICAgICAgICAgaGVpZ2h0ICAgICAgICAgd2VpZ2h0ICAgICAgICAgICBhZ2UgICAgICAgICAgICAgbWFyaXRhbCAgICBcbiBNaW4uICAgOiAgICAgMC4wICAgTWluLiAgIDo1Mi4wICAgTWluLiAgIDogNzYuMCAgIE1pbi4gICA6NDcuMDAgICBzaW5nbGUgICA6MTEyNCAgXG4gMXN0IFF1LjogICAxNjUuNSAgIDFzdCBRdS46NjQuMCAgIDFzdCBRdS46MTU3LjAgICAxc3QgUXUuOjQ5LjAwICAgbWFycmllZCAgOjM4MDYgIFxuIE1lZGlhbiA6IDI5NTg5LjUgICBNZWRpYW4gOjY3LjAgICBNZWRpYW4gOjE4NC4wICAgTWVkaWFuIDo1MS4wMCAgIHNlcGFyYXRlZDogMzY2ICBcbiBNZWFuICAgOiA0MTIwMy45ICAgTWVhbiAgIDo2Ny4xICAgTWVhbiAgIDoxODguMyAgIE1lYW4gICA6NTEuMzMgICBkaXZvcmNlZCA6MTU0OSAgXG4gM3JkIFF1LjogNTUwMDAuMCAgIDNyZCBRdS46NzAuMCAgIDNyZCBRdS46MjEyLjAgICAzcmQgUXUuOjUzLjAwICAgd2lkb3dlZCAgOiAxNjEgIFxuIE1heC4gICA6MzQzODMwLjAgICBNYXguICAgOjg0LjAgICBNYXguICAgOjUyNC4wICAgTWF4LiAgIDo1Ni4wMCAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEncyAgIDo5NSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgIHNleCAgICAgICAgIGVkdWNhdGlvbiAgICAgICAgICBhZnF0ICAgICAgIFxuIG1hbGUgIDozNDAyICAgTWluLiAgIDogMS4wMCAgIE1pbi4gICA6ICAwLjAwICBcbiBmZW1hbGU6MzYwNCAgIDFzdCBRdS46MTIuMDAgICAxc3QgUXUuOiAxNS4xMiAgXG4gICAgICAgICAgICAgICBNZWRpYW4gOjEyLjAwICAgTWVkaWFuIDogMzYuNzYgIFxuICAgICAgICAgICAgICAgTWVhbiAgIDoxMy4yMiAgIE1lYW4gICA6IDQxLjIxICBcbiAgICAgICAgICAgICAgIDNyZCBRdS46MTUuMDAgICAzcmQgUXUuOiA2NS4yNCAgXG4gICAgICAgICAgICAgICBNYXguICAgOjIwLjAwICAgTWF4LiAgIDoxMDAuMDAgIFxuICAgICAgICAgICAgICAgTkEncyAgIDoxMCAgICAgIE5BJ3MgICA6MjYyICAgICBcbiJ9 -->
+<!-- rnb-output-begin eyJkYXRhIjoiICAgICBpbmNvbWUgICAgICAgICAgICAgaGVpZ2h0ICAgICAgICAgd2VpZ2h0ICAgICAgICAgICBhZ2UgICAgICAgICAgICAgbWFyaXRhbCAgICBcbiBNaW4uICAgOiAgICAgMC4wICAgTWluLiAgIDo1Mi4wICAgTWluLiAgIDogNzYuMCAgIE1pbi4gICA6NDcuMDAgICBzaW5nbGUgICA6MTEyNCAgXG4gMXN0IFF1LjogICAxNjUuNSAgIDFzdCBRdS46NjQuMCAgIDFzdCBRdS46MTU3LjAgICAxc3QgUXUuOjQ5LjAwICAgbWFycmllZCAgOjM4MDYgIFxuIE1lZGlhbiA6IDI5NTg5LjUgICBNZWRpYW4gOjY3LjAgICBNZWRpYW4gOjE4NC4wICAgTWVkaWFuIDo1MS4wMCAgIHNlcGFyYXRlZDogMzY2ICBcbiBNZWFuICAgOiA0MTIwMy45ICAgTWVhbiAgIDo2Ny4xICAgTWVhbiAgIDoxODguMyAgIE1lYW4gICA6NTEuMzMgICBkaXZvcmNlZCA6MTU0OSAgXG4gM3JkIFF1LjogNTUwMDAuMCAgIDNyZCBRdS46NzAuMCAgIDNyZCBRdS46MjEyLjAgICAzcmQgUXUuOjUzLjAwICAgd2lkb3dlZCAgOiAxNjEgIFxuIE1heC4gICA6MzQzODMwLjAgICBNYXguICAgOjg0LjAgICBNYXguICAgOjUyNC4wICAgTWF4LiAgIDo1Ni4wMCAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEncyAgIDo5NSAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgIHNleCAgICAgICAgIGVkdWNhdGlvbiAgICAgICAgICBhZnF0ICAgICAgICAgICBpbm50ZWt0ICAgICAgICAgICBob3lkZV9jbSAgICAgICAgdmVrdF9rZyAgXG4gbWFsZSAgOjM0MDIgICBNaW4uICAgOiAxLjAwICAgTWluLiAgIDogIDAuMDAgICBNaW4uICAgOiAgICAgIDAgICBNaW4uICAgOjEzMi4xICAgTWluLiAgIDowICAgXG4gZmVtYWxlOjM2MDQgICAxc3QgUXUuOjEyLjAwICAgMXN0IFF1LjogMTUuMTIgICAxc3QgUXUuOiAgIDEzOTQgICAxc3QgUXUuOjE2Mi42ICAgMXN0IFF1LjowICAgXG4gICAgICAgICAgICAgICBNZWRpYW4gOjEyLjAwICAgTWVkaWFuIDogMzYuNzYgICBNZWRpYW4gOiAyNDkxNDQgICBNZWRpYW4gOjE3MC4yICAgTWVkaWFuIDowICAgXG4gICAgICAgICAgICAgICBNZWFuICAgOjEzLjIyICAgTWVhbiAgIDogNDEuMjEgICBNZWFuICAgOiAzNDY5MzcgICBNZWFuICAgOjE3MC40ICAgTWVhbiAgIDowICAgXG4gICAgICAgICAgICAgICAzcmQgUXUuOjE1LjAwICAgM3JkIFF1LjogNjUuMjQgICAzcmQgUXUuOiA0NjMxMDAgICAzcmQgUXUuOjE3Ny44ICAgM3JkIFF1LjowICAgXG4gICAgICAgICAgICAgICBNYXguICAgOjIwLjAwICAgTWF4LiAgIDoxMDAuMDAgICBNYXguICAgOjI4OTUwNDkgICBNYXguICAgOjIxMy40ICAgTWF4LiAgIDowICAgXG4gICAgICAgICAgICAgICBOQSdzICAgOjEwICAgICAgTkEncyAgIDoyNjIgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgTkEncyAgIDo5NSAgXG4gICAgICA0NTQgICAgICAgICAgIEJNSSAgICBcbiBNaW4uICAgOjQ1NCAgIE1pbi4gICA6MCAgIFxuIDFzdCBRdS46NDU0ICAgMXN0IFF1LjowICAgXG4gTWVkaWFuIDo0NTQgICBNZWRpYW4gOjAgICBcbiBNZWFuICAgOjQ1NCAgIE1lYW4gICA6MCAgIFxuIDNyZCBRdS46NDU0ICAgM3JkIFF1LjowICAgXG4gTWF4LiAgIDo0NTQgICBNYXguICAgOjAgICBcbiAgICAgICAgICAgICAgIE5BJ3MgICA6OTUgIFxuIn0= -->
 <pre><code>     income             height         weight           age             marital    
  Min.   :     0.0   Min.   :52.0   Min.   : 76.0   Min.   :47.00   single   :1124  
  1st Qu.:   165.5   1st Qu.:64.0   1st Qu.:157.0   1st Qu.:49.00   married  :3806  
@@ -310,18 +317,26 @@ position_stack </code></pre>
  3rd Qu.: 55000.0   3rd Qu.:70.0   3rd Qu.:212.0   3rd Qu.:53.00   widowed  : 161  
  Max.   :343830.0   Max.   :84.0   Max.   :524.0   Max.   :56.00                   
                                    NA&#39;s   :95                                      
-     sex         education          afqt       
- male  :3402   Min.   : 1.00   Min.   :  0.00  
- female:3604   1st Qu.:12.00   1st Qu.: 15.12  
-               Median :12.00   Median : 36.76  
-               Mean   :13.22   Mean   : 41.21  
-               3rd Qu.:15.00   3rd Qu.: 65.24  
-               Max.   :20.00   Max.   :100.00  
-               NA&#39;s   :10      NA&#39;s   :262     </code></pre>
+     sex         education          afqt           inntekt           hoyde_cm        vekt_kg  
+ male  :3402   Min.   : 1.00   Min.   :  0.00   Min.   :      0   Min.   :132.1   Min.   :0   
+ female:3604   1st Qu.:12.00   1st Qu.: 15.12   1st Qu.:   1394   1st Qu.:162.6   1st Qu.:0   
+               Median :12.00   Median : 36.76   Median : 249144   Median :170.2   Median :0   
+               Mean   :13.22   Mean   : 41.21   Mean   : 346937   Mean   :170.4   Mean   :0   
+               3rd Qu.:15.00   3rd Qu.: 65.24   3rd Qu.: 463100   3rd Qu.:177.8   3rd Qu.:0   
+               Max.   :20.00   Max.   :100.00   Max.   :2895049   Max.   :213.4   Max.   :0   
+               NA&#39;s   :10      NA&#39;s   :262                                        NA&#39;s   :95  
+      454           BMI    
+ Min.   :454   Min.   :0   
+ 1st Qu.:454   1st Qu.:0   
+ Median :454   Median :0   
+ Mean   :454   Mean   :0   
+ 3rd Qu.:454   3rd Qu.:0   
+ Max.   :454   Max.   :0   
+               NA&#39;s   :95  </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
-<p>Fra summeringstabellen ser vi at maksimumsverdien til variablen <em>income</em> er 343,830. Videre kan vi undersøke hvor mange av observasjonene som innehar denne verdien.</p>
+<p>Fra summeringstabellen ser vi at maksimumsverdien til variablen <em>inntekt</em> er 343,830. Videre kan vi undersøke hvor mange av observasjonene som innehar denne verdien.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGhveWRlJGluY29tZSA9PSAzNDM4MzApXG5gYGAifQ== -->
@@ -343,10 +358,28 @@ position_stack </code></pre>
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>Dersom datasettet reduseres for topp 2% høyeste inntekt og inntekt lik 0, ser histogrammet slik ut:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaG95ZGVfYmVnciA8LSBob3lkZSAlPiVcbiAgZmlsdGVyKGlubnRla3QgPCAxNTAwMDAwLFxuICAgICAgICAgaW5udGVrdCA+IDEpXG5gYGAifQ== -->
+<pre class="r"><code>hoyde_begr &lt;- hoyde %&gt;%
+  filter(inntekt &lt; 1500000,
+         inntekt &gt; 1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuZ2dwbG90KGRhdGEgPSBob3lkZV9iZWdyLCBhZXMoeCA9IGlubnRla3QpKSArIFxuICBnZW9tX2hpc3RvZ3JhbSgpXG5gYGAifQ== -->
+<pre class="r"><code>ggplot(data = hoyde_begr, aes(x = inntekt)) + 
+  geom_histogram()</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
 <ul>
 <li><strong>Har vi med personer uten inntekt i datasettet?</strong></li>
 </ul>
-<p>Ja. Datasettet inneholder observasjoner av en rekke individer uten inntekt. Dette kan vi enkelt observere ved å se på histogrammet på 0 langs x-aksen, hvor vi ser at frekvensen på denne verdien er <span class="math inline">\(&lt;1500\)</span>. Vi kan også benytte summeringstabellen fra tidligere og se på minimumsverdien til variablen <em>income</em> som er på 0. Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verdien, kan vi benytte følgende:</p>
+<p>Ja. Datasettet inneholder observasjoner av en rekke individer uten inntekt. Dette fremkommer av histogrammet til variabelen inntekt hvor <span class="math inline">\(&lt;1500\)</span> er frekvensen til 0 langs x-aksen. Det fremkommer også av hoyde-summeringstabellen at minimumsverdien til inntekt-variabelen er 0. Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verdien, kan vi benytte følgende:</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
 <!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtKGhveWRlJGluY29tZSA9PSAwKVxuYGBgIn0= -->
@@ -361,8 +394,144 @@ position_stack </code></pre>
 </div>
 <div id="del-2---regresjonsanalyse" class="section level1">
 <h1>Del 2 - Regresjonsanalyse</h1>
-<div id="redusere-datasettet" class="section level2">
-<h2>Redusere datasettet</h2>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG0xIDwtIGxtKG1vZDEsIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>lm1 &lt;- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gc3RhdHM6Om1vZGVsLmZyYW1lKGZvcm11bGEgPSBtb2QxLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSwgIDogXG4gIG9iamVjdCAnbW9kMScgbm90IGZvdW5kXG4ifQ== -->
+<pre><code>Error in stats::model.frame(formula = mod1, data = hoyde, subset = complete.cases(hoyde),  : 
+  object &#39;mod1&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeSAobG0xKVxuXG5gYGAifQ== -->
+<pre class="r"><code>summary (lm1)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IG1vZDEsIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tNzgyODEwIC0yNjczNTkgIC05NDUxMyAgMTIzMDk5IDI2OTkyMzQgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciB0IHZhbHVlICAgICAgICAgICAgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAtMTM2MTAwMS4wICAgIDk0NDMwLjAgIC0xNC40MSA8MC4wMDAwMDAwMDAwMDAwMDAyICoqKlxuaG95ZGVfY20gICAgICAgMTAwNDcuOSAgICAgIDU1Mi44ICAgMTguMTggPDAuMDAwMDAwMDAwMDAwMDAwMiAqKipcbi0tLVxuU2lnbmlmLiBjb2RlczogIDAg4oCYKioq4oCZIDAuMDAxIOKAmCoq4oCZIDAuMDEg4oCYKuKAmSAwLjA1IOKAmC7igJkgMC4xIOKAmCDigJkgMVxuXG5SZXNpZHVhbCBzdGFuZGFyZCBlcnJvcjogNDY3MzAwIG9uIDY2NDMgZGVncmVlcyBvZiBmcmVlZG9tXG5NdWx0aXBsZSBSLXNxdWFyZWQ6ICAwLjA0NzM3LFx0QWRqdXN0ZWQgUi1zcXVhcmVkOiAgMC4wNDcyMyBcbkYtc3RhdGlzdGljOiAzMzAuMyBvbiAxIGFuZCA2NjQzIERGLCAgcC12YWx1ZTogPCAwLjAwMDAwMDAwMDAwMDAwMDIyXG4ifQ== -->
+<pre><code>
+Call:
+lm(formula = mod1, data = hoyde, subset = complete.cases(hoyde))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-782810 -267359  -94513  123099 2699234 
+
+Coefficients:
+              Estimate Std. Error t value            Pr(&gt;|t|)    
+(Intercept) -1361001.0    94430.0  -14.41 &lt;0.0000000000000002 ***
+hoyde_cm       10047.9      552.8   18.18 &lt;0.0000000000000002 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 467300 on 6643 degrees of freedom
+Multiple R-squared:  0.04737,   Adjusted R-squared:  0.04723 
+F-statistic: 330.3 on 1 and 6643 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med 1 cm. Test:</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuLTEzNjEwMDEuMCArICgxMDA0Ny45ICogMTczKVxuYGBgIn0= -->
+<pre class="r"><code>-1361001.0 + (10047.9 * 173)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDM3NzI4NS43XG4ifQ== -->
+<pre><code>[1] 377285.7</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuLTEzNjEwMDEuMCArICgxMDA0Ny45ICogMTYxKVxuYGBgIn0= -->
+<pre class="r"><code>-1361001.0 + (10047.9 * 161)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiWzFdIDI1NjcxMC45XG4ifQ== -->
+<pre><code>[1] 256710.9</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubW9kMiA8LSBcImlubnRla3QgfiBob3lkZV9jbSArIHZla3Rfa2dcIlxubG0yIDwtIGxtKG1vZDIsIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKVxuYGBgIn0= -->
+<pre class="r"><code>mod2 &lt;- &quot;inntekt ~ hoyde_cm + vekt_kg&quot;
+lm2 &lt;- lm(mod2, data = hoyde, subset = complete.cases(hoyde))</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShsbTIpXG5gYGAifQ== -->
+<pre class="r"><code>summary(lm2)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IG1vZDIsIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tODQzNjY4IC0yNjMzMjIgIC05MjU3MyAgMTI1Nzk4IDI3MTUwMDAgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgICAgRXN0aW1hdGUgU3RkLiBFcnJvciB0IHZhbHVlICAgICAgICAgICAgIFByKD58dHwpICAgIFxuKEludGVyY2VwdCkgLTE0NjY4NzMuNiAgICA5Njg5MC41IC0xNS4xMzkgPCAwLjAwMDAwMDAwMDAwMDAwMDIgKioqXG5ob3lkZV9jbSAgICAgICAxMTQzMC4zICAgICAgNjI0LjMgIDE4LjMwOCA8IDAuMDAwMDAwMDAwMDAwMDAwMiAqKipcbnZla3Rfa2cgICAgICAgIC0xNTE4LjQgICAgICAzMjAuNSAgLTQuNzM3ICAgICAgICAgICAwLjAwMDAwMjIxICoqKlxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cblJlc2lkdWFsIHN0YW5kYXJkIGVycm9yOiA0NjY2MDAgb24gNjY0MiBkZWdyZWVzIG9mIGZyZWVkb21cbk11bHRpcGxlIFItc3F1YXJlZDogIDAuMDUwNTgsXHRBZGp1c3RlZCBSLXNxdWFyZWQ6ICAwLjA1MDI5IFxuRi1zdGF0aXN0aWM6IDE3Ni45IG9uIDIgYW5kIDY2NDIgREYsICBwLXZhbHVlOiA8IDAuMDAwMDAwMDAwMDAwMDAwMjJcbiJ9 -->
+<pre><code>
+Call:
+lm(formula = mod2, data = hoyde, subset = complete.cases(hoyde))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-843668 -263322  -92573  125798 2715000 
+
+Coefficients:
+              Estimate Std. Error t value             Pr(&gt;|t|)    
+(Intercept) -1466873.6    96890.5 -15.139 &lt; 0.0000000000000002 ***
+hoyde_cm       11430.3      624.3  18.308 &lt; 0.0000000000000002 ***
+vekt_kg        -1518.4      320.5  -4.737           0.00000221 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 466600 on 6642 degrees of freedom
+Multiple R-squared:  0.05058,   Adjusted R-squared:  0.05029 
+F-statistic: 176.9 on 2 and 6642 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Fra regresjonsanalysen over ser man inntekt øker ved økt høyde, men synker ved økning i vekt. Dersom høyde økes med 1 cm og vekt samtidig øker med 1 kg, vil også inntekten øke. Dette skyldes at inntekten øker betydelig mer ved økning i høyde, enn den syker ved tilsvarende økning i vekt.</p>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubG0zIDwtIGxtKG1vZDMsIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKVxuXG5gYGAifQ== -->
+<pre class="r"><code>lm3 &lt;- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3IgaW4gc3RhdHM6Om1vZGVsLmZyYW1lKGZvcm11bGEgPSBtb2QzLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSwgIDogXG4gIG9iamVjdCAnbW9kMycgbm90IGZvdW5kXG4ifQ== -->
+<pre><code>Error in stats::model.frame(formula = mod3, data = hoyde, subset = complete.cases(hoyde),  : 
+  object &#39;mod3&#39; not found</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuc3VtbWFyeShsbTMpXG5cbmBgYCJ9 -->
+<pre class="r"><code>summary(lm3)
+</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5DYWxsOlxubG0oZm9ybXVsYSA9IG1vZDMsIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKVxuXG5SZXNpZHVhbHM6XG4gICAgTWluICAgICAgMVEgIE1lZGlhbiAgICAgIDNRICAgICBNYXggXG4tODg2Mjk1IC0yNjE2MzQgIC05MzU5NyAgMTI0OTA1IDI3MDk5ODEgXG5cbkNvZWZmaWNpZW50czpcbiAgICAgICAgICAgIEVzdGltYXRlIFN0ZC4gRXJyb3IgdCB2YWx1ZSAgICAgUHIoPnx0fCkgICAgXG4oSW50ZXJjZXB0KSAtMjAxNTg5MCAgICAgNDQ3MDA1ICAtNC41MTAgMC4wMDAwMDY2MDEyICoqKlxuaG95ZGVfY20gICAgICAgMTQ2NjkgICAgICAgMjY0OSAgIDUuNTM3IDAuMDAwMDAwMDMxOSAqKipcbnZla3Rfa2cgICAgICAgIC00NzIzICAgICAgIDI1NjcgIC0xLjg0MCAgICAgICAwLjA2NTggLiAgXG5CTUkgICAgICAgICAgICAgOTIyNCAgICAgICA3MzMyICAgMS4yNTggICAgICAgMC4yMDg0ICAgIFxuLS0tXG5TaWduaWYuIGNvZGVzOiAgMCDigJgqKirigJkgMC4wMDEg4oCYKirigJkgMC4wMSDigJgq4oCZIDAuMDUg4oCYLuKAmSAwLjEg4oCYIOKAmSAxXG5cblJlc2lkdWFsIHN0YW5kYXJkIGVycm9yOiA0NjY2MDAgb24gNjY0MSBkZWdyZWVzIG9mIGZyZWVkb21cbk11bHRpcGxlIFItc3F1YXJlZDogIDAuMDUwODEsXHRBZGp1c3RlZCBSLXNxdWFyZWQ6ICAwLjA1MDM4IFxuRi1zdGF0aXN0aWM6IDExOC41IG9uIDMgYW5kIDY2NDEgREYsICBwLXZhbHVlOiA8IDAuMDAwMDAwMDAwMDAwMDAwMjJcbiJ9 -->
+<pre><code>
+Call:
+lm(formula = mod3, data = hoyde, subset = complete.cases(hoyde))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-886295 -261634  -93597  124905 2709981 
+
+Coefficients:
+            Estimate Std. Error t value     Pr(&gt;|t|)    
+(Intercept) -2015890     447005  -4.510 0.0000066012 ***
+hoyde_cm       14669       2649   5.537 0.0000000319 ***
+vekt_kg        -4723       2567  -1.840       0.0658 .  
+BMI             9224       7332   1.258       0.2084    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 466600 on 6641 degrees of freedom
+Multiple R-squared:  0.05081,   Adjusted R-squared:  0.05038 
+F-statistic: 118.5 on 3 and 6641 DF,  p-value: &lt; 0.00000000000000022</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+<p>Videre fremkommer det at en kombinasjon av økning i høyde, vekt og BMI, også vil gi en økning i innekt.</p>
+<p>…………………………………….. ## Redusere datasettet</p>
 <p>Med henhold til at vi har funnet ut at datasettet inneholder mange minimumsverdier på 0 og at maksimumsverdien på 343,830 utgjorde kun 2% av utvalget, skal vi fjerne disse verdiene for å kunne kjøre en endelig modell mot reduserte datasett. Dette gjør vi for å teste modellens robushet.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
@@ -398,7 +567,6 @@ position_stack </code></pre>
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <p>Her kan vi se at både minimums- og makismumsverdien har endret seg. Det nye datasettet inneholder også færre observasjoner: <span class="math display">\[7006-143-1740=5123\]</span> Ny <span class="math inline">\(n=5123\)</span> til datasettet <em>sample1</em>.</p>
-</div>
 <div id="mutering-av-eksisterende-variabler-fra-imperial--til-metric-system" class="section level2">
 <h2>Mutering av eksisterende variabler fra imperial- til metric system</h2>
 <p>Siden vi benytter oss av det metriske systemet i Norge og datasettet har brukt det imperiske, så ønsker vi å endre disse variablene. Variablene dette omhandler er <em>height</em> og <em>weight</em> som vi skal gjøre om til <em>height_cm</em> og <em>weight_kg</em>. Har funnet ut på nettet at en inch er 2.54 cm og en pund er ca. 0.45 kg.</p>
@@ -482,6 +650,7 @@ weight_kg
 <!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<p>………………….</p>
 </div>
 <div id="opprettelse-av-ny-variabel-bmi" class="section level2">
 <h2>Opprettelse av ny variabel BMI</h2>
@@ -929,7 +1098,7 @@ The following object is masked from ‘package:dplyr’:
 </div>
 </div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzXzIiCmF1dGhvcjogIkNocmlzdG9mZmVyc2VuIEouICYgSGF1Z2xhbmQgVi4iCmRhdGU6ICJPa3RvYmVyIDE0LiAyMDIxIgpvdXRwdXQ6CiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdApsYW5nOiBuby1OQgotLS0KCiMgRGVsIDEgLSBJbm5sZWRuaW5nCgpCYXJlIGVuIGxpdGVuIHRlc3QuCgojIyBLb3J0IGlubmxlZG5pbmcKCiMjIEtvcnQgbGl0dGVyYXR1cmdqZW5ub21nYW5nIHDDpSBjYS4gMSBzaWRlCgpgYGB7ciBzZXR1cH0KbGlicmFyeShtb2RlbHIpCmxpYnJhcnkoZHBseXIpCmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeSh0aW55dGV4KQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShnZ3B1YnIpCmxpYnJhcnkoaHV4dGFibGUpCm9wdGlvbnMoc2NpcGVuID0gOTk5KQpgYGAKCiMjIEFuYWx5c2UKClZpIGxhZ2VyIGbDuHJzdCBldCBoaXN0b2dyYW0gbWVkIGlubnRla3RzLXZhcmlhYmVsLiAKCmBgYHtyfQojIEVuZHJlciBuYXZuIHDDpSBkYXRhc2V0dGV0IGZyYSBoZWlnaHRzIHRpbCBob3lkZQpkYXRhKCJoZWlnaHRzIiwgcGFja2FnZSA9ICJtb2RlbHIiKQpob3lkZSA8LSBoZWlnaHRzCmBgYAoKIyMgQmVza3JpdmVuZGUgc3RhdGlzdGlrawoKSSBkYXRhc2V0dGV0IGhveWRlIGhhciB2aSAkbj03MDA2JCwgc29tIHZpbCBzaSBhdCBzZXR0ZXQgYmVzdMOlciBhdiB0b3RhbHQgNzAwNiB1bGlrZSBvYnNlcnZhc2pvbmVyLiBWaWRlcmUgaGFyIHZpIGRlIDcgdWF2aGVuZ2lnZSB2YXJpYWJlbGVuZSAqaMO4eWRlKiwgKnZla3QqLCAqYWxkZXIqLCAqc2l2aWxzdGF0dXMqLCAqa2rDuG5uKiwgKnV0ZGFubmVsc2UqIG9nICphZnF0KiAoU2NvcmUgZnJhIGZvcnZhcmV0cyBrdmFsaWZpc2VyaW5nc3Rlc3QpLCBzb20gYmVzdGVtbWVyIGRlbiBhdmhlbmdpZ2UgdmFyaWFibGVuICppbm50ZWt0KiBpIGRldHRlIHNldHRldC4gSHZvcmF2IHZhcmlhYmxlbmUgKnNpdmlsc3RhdHVzKiBvZyAqa2rDuG5uKiBlciBzw6VrYWx0ZSBkdW1teXZhcmlhYmxlci4gKlNpdmlsc3RhdHVzKiB2YXJpZXIgbWVkIGZlbSB1bGlrZSBmYWt0b3JlciBzb20gZXIgKnNpbmdlbCosICpnaWZ0KiwgKnNlcGFyZXJ0KiwgKnNraWx0KiBvZyAqZW5rZSogb2cgZHVtbXl2YXJpYWJsZW4gKmtqw7hubiogdmFyaWVyIG1lbGxvbSB0YWxsZXQgMSBvZyAyIHNvbSBiZXN0ZW1tZXIgb20gaW5kaXZpZGV0IHNvbSBlciBvYnNlcnZlcnQgZXIgZW50ZW4gbWFubiBlbGxlciBrdmlubmUuCgojIyBFREEKCi0gKipIaXN0b2dyYW0gdGlsIHZhcmlhYmVsZW4gaW5uZWt0KioKVGlsIMOlIGJlZ3lubmUgbWVkIGxhZ2VzIHRyZSBueWUgdmFyaWFibGVyIHNvbSBzZXR0ZXMgdGlsIGVuIG1ldHJpc2sgc3RhbmRhcmQuCgpgYGB7cn0KaG95ZGUgPC0gaG95ZGUgJT4lCiAgbXV0YXRlKGlubnRla3QgPSBpbmNvbWUgKiA4LjQyLAogICAgICAgICBob3lkZV9jbSA9IGhlaWdodCAqIDIuNTQsCiAgICAgICAgIHZla3Rfa2cgPSB3ZWlnaHQgKiAwLCA0NTQsCiAgICAgICAgIEJNSSA9IHZla3Rfa2cgLyAoaG95ZGVfY20vMTAwKV4yKQpgYGAKCgpgYGB7cn0KZ2dwbG90KGRhdGEgPSBob3lkZSwgYWVzKHggPSBpbm50ZWt0KSkgKyAKICBnZW9tX2hpc3RvZ3JhbSgpCiAgZ2VvbV9oaXN0b2dyYW0oYmlucyA9IDMwKQogIApgYGAKCi0gKipGb3JrbGFyaW5nIHDDpSB1dGxpZ2dlcm5lIGxhbmd0IHRpbCBow7h5cmUqKgoKVXRsaWdnZXJlbiB0aWwgaMO4eXJlIHZpc2VyIGdqZW5ub21zbml0dGV0IGF2IDIlIHRvcHAgaW5udGVrdC4KRm9yIMOlIGZvcmtsYXJlIGRldHRlIGJlZHJlIGthbiB2aSBiZWd5bm5lIG1lZCDDpSBmaW5uZSBtYWtzaW11bXN2ZXJkaWVuIGF2IHZhcmlhYmxlbiAqaW5jb21lKi4KCmBgYHtyfQpzdW1tYXJ5KGhveWRlKQpgYGAKCkZyYSBzdW1tZXJpbmdzdGFiZWxsZW4gc2VyIHZpIGF0IG1ha3NpbXVtc3ZlcmRpZW4gdGlsIHZhcmlhYmxlbiAqaW5jb21lKiBlciAzNDMsODMwLiBWaWRlcmUga2FuIHZpIHVuZGVyc8O4a2UgaHZvciBtYW5nZSBhdiBvYnNlcnZhc2pvbmVuZQpzb20gaW5uZWhhciBkZW5uZSB2ZXJkaWVuLgoKYGBge3J9CnN1bShob3lkZSRpbmNvbWUgPT0gMzQzODMwKQpgYGAKClRvdGFsdCB2YXIgZGV0IDcwMDYgb2JzZXJ2YXNqb25lciBvZyBtZWQgaGVuc3luIHRpbCBhdCAxNDMgaGFkZGUgbWFrc2ltdW1zdmVyZGllbiBvZyBhdCBkZXQgZXIgZW4gcmVsYXRpdnQgc3RvciBhdnN0YW5kIG1lbGxvbSBtYWtzaW5udGVrdGVuIG9nIG1lZGlhbmVuIHRpbCBkYXRhc2V0dGV0LCBrYW4gdmkgc2kgYXQgdXRsaWdnZXJuZSB0aWwgaMO4eWVyZSByZXByZXNlbnRlcmVyIGV0IGdqZW5ub21zbml0dCBhdiBjYS4gMiUgYXYgZGV0IHRvdGFsZSB1dHZhbGdldC4KCmBgYHtyfQooMTQzLzcwMDYpKjEwMApgYGAKCi0gKipIYXIgdmkgbWVkIHBlcnNvbmVyIHV0ZW4gaW5udGVrdCBpIGRhdGFzZXR0ZXQ/KioKCkphLiBEYXRhc2V0dGV0IGlubmVob2xkZXIgb2JzZXJ2YXNqb25lciBhdiBlbiByZWtrZSBpbmRpdmlkZXIgdXRlbiBpbm50ZWt0LiBEZXR0ZSBrYW4gdmkgZW5rZWx0IG9ic2VydmVyZSB2ZWQgw6Ugc2UgcMOlIGhpc3RvZ3JhbW1ldCBww6UgMCBsYW5ncyB4LWFrc2VuLCBodm9yIHZpIHNlciBhdCBmcmVrdmVuc2VuIHDDpSBkZW5uZSB2ZXJkaWVuIGVyICQ8MTUwMCQuIFZpIGthbiBvZ3PDpSBiZW55dHRlIHN1bW1lcmluZ3N0YWJlbGxlbiBmcmEgdGlkbGlnZXJlIG9nIHNlIHDDpSBtaW5pbXVtc3ZlcmRpZW4gdGlsIHZhcmlhYmxlbiAqaW5jb21lKiBzb20gZXIgcMOlIDAuIERlcnNvbSB2aSDDuG5za2VyIMOlIGZpbm5lIHV0IGh2b3IgbWFuZ2UgYXYgZGUgb2JzZXJ2ZXJ0ZSBzb20gaW5uZWhhciBkZW5uZSB2ZXJkaWVuLCBrYW4gdmkgYmVueXR0ZSBmw7hsZ2VuZGU6CgpgYGB7cn0Kc3VtKGhveWRlJGluY29tZSA9PSAwKQpgYGAKCiMgRGVsIDIgLSBSZWdyZXNqb25zYW5hbHlzZQoKIyMgUmVkdXNlcmUgZGF0YXNldHRldAoKTWVkIGhlbmhvbGQgdGlsIGF0IHZpIGhhciBmdW5uZXQgdXQgYXQgZGF0YXNldHRldCBpbm5laG9sZGVyIG1hbmdlIG1pbmltdW1zdmVyZGllciBww6UgMCBvZyBhdCBtYWtzaW11bXN2ZXJkaWVuIHDDpSAzNDMsODMwIHV0Z2pvcmRlIGt1biAyJSBhdiB1dHZhbGdldCwgc2thbCB2aSBmamVybmUgZGlzc2UgdmVyZGllbmUgZm9yIMOlIGt1bm5lIGtqw7hyZSBlbiBlbmRlbGlnIG1vZGVsbCBtb3QgcmVkdXNlcnRlIGRhdGFzZXR0LiBEZXR0ZSBnasO4ciB2aSBmb3Igw6UgdGVzdGUgbW9kZWxsZW5zIHJvYnVzaGV0LiAKCmBgYHtyfQpzYW1wbGUxPWZpbHRlcihob3lkZSxpbmNvbWUhPTAgJiBpbmNvbWUhPTM0MzgzMCkKYGBgCgpIZXIgaGFyIHZpIG9wcHJldHRldCBlbiBueSBtb2RlbCwgdW5kZXIgbmF2bmV0ICpzYW1wbGUxKi4gRm9yIMOlIHNqZWtrZSBvbSBkZSByaWt0aWdlIHZlcmRpZW5lIGJsZSBmamVybmV0IGthbiB2aSBrasO4cmUgZW4gbnkgc3VtbWVyaW5nc3RhYmVsbC4KCmBgYHtyfQpzdW1tYXJ5KHNhbXBsZTEpCmBgYAoKSGVyIGthbiB2aSBzZSBhdCBiw6VkZSBtaW5pbXVtcy0gb2cgbWFraXNtdW1zdmVyZGllbiBoYXIgZW5kcmV0IHNlZy4gRGV0IG55ZSBkYXRhc2V0dGV0IGlubmVob2xkZXIgb2dzw6UgZsOmcnJlIG9ic2VydmFzam9uZXI6CiQkNzAwNi0xNDMtMTc0MD01MTIzJCQKTnkgJG49NTEyMyQgdGlsIGRhdGFzZXR0ZXQgKnNhbXBsZTEqLgoKIyMgTXV0ZXJpbmcgYXYgZWtzaXN0ZXJlbmRlIHZhcmlhYmxlciBmcmEgaW1wZXJpYWwtIHRpbCBtZXRyaWMgc3lzdGVtCgpTaWRlbiB2aSBiZW55dHRlciBvc3MgYXYgZGV0IG1ldHJpc2tlIHN5c3RlbWV0IGkgTm9yZ2Ugb2cgZGF0YXNldHRldCBoYXIgYnJ1a3QgZGV0IGltcGVyaXNrZSwgc8OlIMO4bnNrZXIgdmkgw6UgZW5kcmUgZGlzc2UgdmFyaWFibGVuZS4gVmFyaWFibGVuZSBkZXR0ZSBvbWhhbmRsZXIgZXIgKmhlaWdodCogb2cgKndlaWdodCogc29tIHZpIHNrYWwgZ2rDuHJlIG9tIHRpbCAqaGVpZ2h0X2NtKiBvZyAqd2VpZ2h0X2tnKi4gSGFyIGZ1bm5ldCB1dCBww6UgbmV0dGV0IGF0IGVuIGluY2ggZXIgMi41NCBjbSBvZyBlbiBwdW5kIGVyIGNhLiAwLjQ1IGtnLgoKYGBge3J9CmhveWRlIDwtIGhveWRlICU+JQogIG11dGF0ZShoZWlnaHRfY20gPSBoZWlnaHQgKiAyLjU0KQpgYGAKCi0gKipWaSBrYW4gdGVzdGUgb20gbXV0ZXJpbmdlbiBhdiAqaGVpZ2h0KiBmdW5nZXJlciB2ZWQgw6U6KioKCmBgYHtyfQojIEZpbm5lIG1ha3N2ZXJkaWVuIGF2IGRlbiBueWUgdmFyaWFibGVuCm1heChob3lkZSRoZWlnaHRfY20pCmBgYAoKYGBge3J9CiMgVmkga2FuIHNqZWtrZSBhdCBkZXR0ZSBzdGVtbWVyIHZlZCDDpSBzZSBodmEgZGVuIGjDuHllc3RlIGkgaW5jaGVzIGVyCm1heChob3lkZSRoZWlnaHQpCmBgYAoKYGBge3J9CiMgT2cgc8OlIGdhbmdlIG1lZCAyLjU0IHNvbSB2YXIgb3ZlcmdhbmdlbiBmcmEgaW5jaGVzIHRpbCBjbQo4NCoyLjU0CmBgYAoKYGBge3J9CiMgQnJ1a2VyIHNhbW1lIGZyZW1nYW5nc23DpXRlIGZvciBwdW5kIHRpbCBrZwpob3lkZSA8LSBob3lkZSAlPiUKICBtdXRhdGUod2VpZ2h0X2tnID0gd2VpZ2h0ICowLjQ1KQpgYGAKCkZyYSBzdW1tZXJpbmdzdGFiZWxsZW4gdGlsIGRhdGFzZXR0ZXQgKmhveWRlKiBrYW4gdmkgc2UgYXQgdmFyaWFibGVuICp3ZWlnaHQqIGhhciBmbGVyZSBOQS12ZXJkaWVyLCBhbHRzw6UgdmVyZGllciBzb20gaWtrZSBlciB0aWxnamVuZ2VsaWdlLiBEZXJzb20gbWFuIMO4bnNrZXIgw6UgZmlubmUgdXQgaHZhIGZvciBla3NlbXBlbCBtYWtzaW11bXN2ZXJkaWVuIHRpbCAqd2VpZ2h0X2tnKiBlciBtw6UgbWFuIHNrcml2ZSBmw7hsZ2VuZGU6CgpgYGB7cn0KbWF4KGhveWRlJHdlaWdodF9rZywgbmEucm0gPSBUUlVFKQpgYGAKClZpIHB1dHRlciBpbm4gJG5hLnJtID0gVFJVRSQgc2xpayBhdCBSIHV0ZWxhdGVyIGNlbGxlbmUgbWVkIGJldGVnbmVsc2VuICpOQSogKE5vdCBhdmFpbGFibGUpLiBEZXR0ZSBnasO4ciBhdCB2aSBrdW4gZsOlciBjZWxsZW5lIG1lZCB0YWxsdmVyZGllci4KCkRlcnNvbSBtYW4gw7huc2tlciDDpSBmaW5uZSB1dCBvbSBhbmRyZSB2YXJpYWJsZXIgb2dzw6UgaW5uZWhhciB2ZXJkaWVyIHNvbSBlciBOQSwga2FuIHZpIHNrcml2ZToKCmBgYHtyfQojIEZvciDDpSBzamVra2UgaHZpbGtlIGNlbGxlciBzb20gaGFyIE5BCmNvbFN1bXMoaXMubmEoaG95ZGUpKQpgYGAKCiMjIE9wcHJldHRlbHNlIGF2IG55IHZhcmlhYmVsIEJNSQoKYGBge3J9CmhveWRlIDwtIGhveWRlICU+JQogIG11dGF0ZShob3lkZSwgYm1pID0gd2VpZ2h0X2tnLyhoZWlnaHRfY20pXjIpCmBgYAoKIyMgRm9yZW5rbGV0IHV0Z2F2ZSBhdiB2YXJpYWJsZW4gbWFydGlhbAoKU2lkZW4gZHVtbXl2YXJpYWJlbCAqbWFyaXRhbCogaW5uaG9sZHQgaGVsZSA1IHVsaWtlIGZha3RvcmVyLCBzw6Ugw7huc2tlciB2aSDDpSBmb3JlbmtsZSBkZW5uZSB0aWwgZW50ZW4gIlRydWUiIGVsbGVyICJGYWxzZSIgZm9yIG9tIGluZGl2aWRldCBlciBnaWZ0IGVsbGVyIGlra2UtZ2lmdC4gCgpgYGB7cn0KaG95ZGUgPC0gaG95ZGUgJT4lCiAgbXV0YXRlKAogICAgbWFycmllZCA9IGZhY3RvcigKICAgICAgY2FzZV93aGVuKAogICAgICAgIG1hcml0YWwgPT0gIm1hcnJpZWQiIH4gVFJVRSwKICAgICAgICBUUlVFIH4gRkFMU0UKICAgICAgKQogICAgKQogICkKYGBgCgojIERlbCAzIC0gRXN0aW1lcmUgbW9kZWxsZXIKCgpgYGB7cn0KbG0xIDwtIGxtKGluY29tZSB+IGhlaWdodF9jbSwgZGF0YSA9IGhveWRlLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmxtMiA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20gKyB3ZWlnaHRfa2cgKyBlZHVjYXRpb24sIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKQpsbTMgPC0gbG0oaW5jb21lIH4gaGVpZ2h0X2NtICsgc2V4ICsgYWdlICsgZWR1Y2F0aW9uLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSkKYGBgCgojIyBUZXN0IGludGVyYWtzam9uCgpgYGB7cn0KbV9lZHVjc2V4X2kgPC0gImluY29tZSB+IGVkdWNhdGlvbipzZXgiCmxtX2VkdWNzZXhfaSA8LSBsbShtX2VkdWNzZXhfaSwgZGF0YSA9IGhveWRlKQpgYGAKCmBgYHtyfQpzdW1tYXJ5KGxtX2VkdWNzZXhfaSkKYGBgCgpgYGB7cn0Kc3VtbWFyeShsbTIpCmBgYAoKYGBge3J9CmxpYnJhcnkoaHV4dGFibGUpCmBgYAoKYGBge3J9Cmh1eHJlZyhsbTEsIGxtMiwgbG0zKQpgYGAKCiMjIFJlZHVzZXJ0IGRhdGFzZXR0CgoKYGBge3J9CiMgTGVnZ2UgdGlsIGhlaWdodF9jbSBpIHJlZHVzZXJ0IGRhdGFzZXR0IChzYW1wbGUxKQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKGhlaWdodF9jbSA9IGhlaWdodCAqIDIuNTQpCmBgYAoKYGBge3J9CiMgTGVnZ2UgdGlsIHdlaWdodF9rZyBpIHJlZHVzZXJ0IGRhdGFzZXR0IChzYW1wbGUxKQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKHdlaWdodF9rZyA9IHdlaWdodCAqMC40NSkKYGBgCgpgYGB7cn0KIyBMZWdnZSB0aWwgYm1pIGkgc2FtcGxlMQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKHNhbXBsZTEsIGJtaSA9IHdlaWdodF9rZy8oaGVpZ2h0X2NtKV4yKQpgYGAKCmBgYHtyfQojIExlZ2dlIHRpbCBmb3JlbmtsZXQgdXRnYXZlIGF2IG1hcnJpdGFsIGkgc2FtcGxlMQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKAogICAgbWFycmllZCA9IGZhY3RvcigKICAgICAgY2FzZV93aGVuKAogICAgICAgIG1hcml0YWwgPT0gIm1hcnJpZWQiIH4gVFJVRSwKICAgICAgICBUUlVFIH4gRkFMU0UKICAgICAgKQogICAgKQogICkKYGBgCgoKYGBge3J9CmxtNCA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20sIGRhdGEgPSBzYW1wbGUxLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmxtNSA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20gKyB3ZWlnaHRfa2cgKyBlZHVjYXRpb24sIGRhdGEgPSBzYW1wbGUxLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmxtNiA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20gKyBzZXggKyBhZ2UgKyBlZHVjYXRpb24sIGRhdGEgPSBzYW1wbGUxLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmBgYAoKYGBge3J9CnN1bW1hcnkobG01KQpgYGAKCmBgYHtyfQpodXhyZWcobG00LCBsbTUsIGxtNikKYGBgCgpgYGB7cn0KaHV4cmVnKAogIGxpc3QoIk1vZGVsbCAxIiA9IGxtMSwgIk1vZGVsbCA0IiA9IGxtNCksCiAgZXJyb3JfZm9ybWF0ID0gIlt7c3RhdGlzdGljfV0iLAogIG5vdGUgPSAiUmVncmVzam9uc3RhYmVsbCAxOiB7c3RhcnN9LiBUIHN0YXRpc3RpY3MgaW4gYnJhY2tldHMuIgopCmBgYAoKYGBge3J9Cmh1eHJlZygKICBsaXN0KCJNb2RlbGwgMiIgPSBsbTIsICJNb2RlbGwgNSIgPSBsbTUpLAogIGVycm9yX2Zvcm1hdCA9ICJbe3N0YXRpc3RpY31dIiwKICBub3RlID0gIlJlZ3Jlc2pvbnN0YWJlbGwgMjoge3N0YXJzfS4gVCBzdGF0aXN0aWNzIGluIGJyYWNrZXRzLiIKKQpgYGAKCmBgYHtyfQpodXhyZWcoCiAgbGlzdCgiTW9kZWxsIDMiID0gbG0zLCAiTW9kZWxsIDYiID0gbG02KSwKICBlcnJvcl9mb3JtYXQgPSAiW3tzdGF0aXN0aWN9XSIsCiAgbm90ZSA9ICJSZWdyZXNqb25zdGFiZWxsIDM6IHtzdGFyc30uIFQgc3RhdGlzdGljcyBpbiBicmFja2V0cy4iCikKYGBgCgojIyBJbnRlcmFrc2pvbiBww6UgcmVkdXNlcnQgZGF0YXNldHQKCmBgYHtyfQptX2VkdWNzZXhfaSA8LSAiaW5jb21lIH4gZWR1Y2F0aW9uKnNleCIKbG1fZWR1Y3NleF9pSSA8LSBsbShtX2VkdWNzZXhfaSwgZGF0YSA9IHNhbXBsZTEpCmBgYAoKYGBge3J9CnN1bW1hcnkobG1fZWR1Y3NleF9pSSkKYGBgCgpgYGB7cn0KbGlicmFyeShjYXIpCmBgYAoKYGBge3J9CnN1bW1hcnkobG02KQpgYGAKCgoK</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiQXNzXzIiCmF1dGhvcjogIkNocmlzdG9mZmVyc2VuIEouICYgSGF1Z2xhbmQgVi4iCmRhdGU6ICJPa3RvYmVyIDE0LiAyMDIxIgpvdXRwdXQ6CiAgcGRmX2RvY3VtZW50OiBkZWZhdWx0CiAgaHRtbF9ub3RlYm9vazogZGVmYXVsdApsYW5nOiBuby1OQgotLS0KCiMgRGVsIDEgLSBJbm5sZWRuaW5nCgpCYXJlIGVuIGxpdGVuIHRlc3QuCgojIyBLb3J0IGlubmxlZG5pbmcKCiMjIEtvcnQgbGl0dGVyYXR1cmdqZW5ub21nYW5nIHDDpSBjYS4gMSBzaWRlCgpgYGB7ciBzZXR1cH0KbGlicmFyeShtb2RlbHIpCmxpYnJhcnkoZHBseXIpCmxpYnJhcnkoZ2dwbG90MikKbGlicmFyeSh0aW55dGV4KQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShnZ3B1YnIpCmxpYnJhcnkoaHV4dGFibGUpCm9wdGlvbnMoc2NpcGVuID0gOTk5KQpgYGAKCiMjIEFuYWx5c2UKClZpIGxhZ2VyIGbDuHJzdCBldCBoaXN0b2dyYW0gbWVkIGlubnRla3RzLXZhcmlhYmVsLiAKCmBgYHtyfQojIEVuZHJlciBuYXZuIHDDpSBkYXRhc2V0dGV0IGZyYSBoZWlnaHRzIHRpbCBob3lkZQpkYXRhKCJoZWlnaHRzIiwgcGFja2FnZSA9ICJtb2RlbHIiKQpob3lkZSA8LSBoZWlnaHRzCmBgYAoKIyMgQmVza3JpdmVuZGUgc3RhdGlzdGlrawoKSSBkYXRhc2V0dGV0IGhveWRlIGhhciB2aSAkbj03MDA2JCwgc29tIHZpbCBzaSBhdCBzZXR0ZXQgYmVzdMOlciBhdiB0b3RhbHQgNzAwNiB1bGlrZSBvYnNlcnZhc2pvbmVyLiBWaWRlcmUgaGFyIHZpIGRlIDcgdWF2aGVuZ2lnZSB2YXJpYWJlbGVuZSAqaMO4eWRlKiwgKnZla3QqLCAqYWxkZXIqLCAqc2l2aWxzdGF0dXMqLCAqa2rDuG5uKiwgKnV0ZGFubmVsc2UqIG9nICphZnF0KiAoU2NvcmUgZnJhIGZvcnZhcmV0cyBrdmFsaWZpc2VyaW5nc3Rlc3QpLCBzb20gYmVzdGVtbWVyIGRlbiBhdmhlbmdpZ2UgdmFyaWFibGVuICppbm50ZWt0KiBpIGRldHRlIHNldHRldC4gSHZvcmF2IHZhcmlhYmxlbmUgKnNpdmlsc3RhdHVzKiBvZyAqa2rDuG5uKiBlciBzw6VrYWx0ZSBkdW1teXZhcmlhYmxlci4gKlNpdmlsc3RhdHVzKiB2YXJpZXIgbWVkIGZlbSB1bGlrZSBmYWt0b3JlciBzb20gZXIgKnNpbmdlbCosICpnaWZ0KiwgKnNlcGFyZXJ0KiwgKnNraWx0KiBvZyAqZW5rZSogb2cgZHVtbXl2YXJpYWJsZW4gKmtqw7hubiogdmFyaWVyIG1lbGxvbSB0YWxsZXQgMSBvZyAyIHNvbSBiZXN0ZW1tZXIgb20gaW5kaXZpZGV0IHNvbSBlciBvYnNlcnZlcnQgZXIgZW50ZW4gbWFubiBlbGxlciBrdmlubmUuCgojIyBFREEKCi0gKipIaXN0b2dyYW0gdGlsIHZhcmlhYmVsZW4gaW5uZWt0KioKVGlsIMOlIGJlZ3lubmUgbWVkIGxhZ2VzIHRyZSBueWUgdmFyaWFibGVyIHNvbSBzZXR0ZXMgdGlsIGVuIG1ldHJpc2sgc3RhbmRhcmQuCgpgYGB7cn0KaG95ZGUgPC0gaG95ZGUgJT4lCiAgbXV0YXRlKGlubnRla3QgPSBpbmNvbWUgKiA4LjQyLAogICAgICAgICBob3lkZV9jbSA9IGhlaWdodCAqIDIuNTQsCiAgICAgICAgIHZla3Rfa2cgPSB3ZWlnaHQgKiAwLjQ1NCwKICAgICAgICAgQk1JID0gdmVrdF9rZyAvIChob3lkZV9jbS8xMDApXjIpCmBgYAoKCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IGhveWRlLCBhZXMoeCA9IGlubnRla3QpKSArIAogIGdlb21faGlzdG9ncmFtKCkKICBnZW9tX2hpc3RvZ3JhbShiaW5zID0gMzApCiAgCmBgYAoKLSAqKkZvcmtsYXJpbmcgcMOlIHV0bGlnZ2VybmUgbGFuZ3QgdGlsIGjDuHlyZSoqCgpVdGxpZ2dlcmVuIHRpbCBow7h5cmUgdmlzZXIgZ2plbm5vbXNuaXR0ZXQgYXYgMiUgdG9wcCBpbm50ZWt0LgpGb3Igw6UgZm9ya2xhcmUgZGV0dGUgYmVkcmUga2FuIHZpIGJlZ3lubmUgbWVkIMOlIGZpbm5lIG1ha3NpbXVtc3ZlcmRpZW4gYXYgdmFyaWFibGVuICppbm50ZWt0Ki4KCmBgYHtyfQpzdW1tYXJ5KGhveWRlKQpgYGAKCkZyYSBzdW1tZXJpbmdzdGFiZWxsZW4gc2VyIHZpIGF0IG1ha3NpbXVtc3ZlcmRpZW4gdGlsIHZhcmlhYmxlbiAqaW5udGVrdCogZXIgMzQzLDgzMC4gVmlkZXJlIGthbiB2aSB1bmRlcnPDuGtlIGh2b3IgbWFuZ2UgYXYgb2JzZXJ2YXNqb25lbmUKc29tIGlubmVoYXIgZGVubmUgdmVyZGllbi4KCmBgYHtyfQpzdW0oaG95ZGUkaW5jb21lID09IDM0MzgzMCkKYGBgCgpUb3RhbHQgdmFyIGRldCA3MDA2IG9ic2VydmFzam9uZXIgb2cgbWVkIGhlbnN5biB0aWwgYXQgMTQzIGhhZGRlIG1ha3NpbXVtc3ZlcmRpZW4gb2cgYXQgZGV0IGVyIGVuIHJlbGF0aXZ0IHN0b3IgYXZzdGFuZCBtZWxsb20gbWFrc2lubnRla3RlbiBvZyBtZWRpYW5lbiB0aWwgZGF0YXNldHRldCwga2FuIHZpIHNpIGF0IHV0bGlnZ2VybmUgdGlsIGjDuHllcmUgcmVwcmVzZW50ZXJlciBldCBnamVubm9tc25pdHQgYXYgY2EuIDIlIGF2IGRldCB0b3RhbGUgdXR2YWxnZXQuCgpgYGB7cn0KKDE0My83MDA2KSoxMDAKYGBgCgpEZXJzb20gZGF0YXNldHRldCByZWR1c2VyZXMgZm9yIHRvcHAgMiUgaMO4eWVzdGUgaW5udGVrdCBvZyBpbm50ZWt0IGxpayAwLCBzZXIgaGlzdG9ncmFtbWV0IHNsaWsgdXQ6CgpgYGB7cn0KaG95ZGVfYmVnciA8LSBob3lkZSAlPiUKICBmaWx0ZXIoaW5udGVrdCA8IDE1MDAwMDAsCiAgICAgICAgIGlubnRla3QgPiAxKQpgYGAKCmBgYHtyfQpnZ3Bsb3QoZGF0YSA9IGhveWRlX2JlZ3IsIGFlcyh4ID0gaW5udGVrdCkpICsgCiAgZ2VvbV9oaXN0b2dyYW0oKQpgYGAKCi0gKipIYXIgdmkgbWVkIHBlcnNvbmVyIHV0ZW4gaW5udGVrdCBpIGRhdGFzZXR0ZXQ/KioKCkphLiBEYXRhc2V0dGV0IGlubmVob2xkZXIgb2JzZXJ2YXNqb25lciBhdiBlbiByZWtrZSBpbmRpdmlkZXIgdXRlbiBpbm50ZWt0LiBEZXR0ZSBmcmVta29tbWVyIGF2IGhpc3RvZ3JhbW1ldCB0aWwgdmFyaWFiZWxlbiBpbm50ZWt0IGh2b3IgJDwxNTAwJCBlciBmcmVrdmVuc2VuIHRpbCAwIGxhbmdzIHgtYWtzZW4uCkRldCBmcmVta29tbWVyIG9nc8OlIGF2IGhveWRlLXN1bW1lcmluZ3N0YWJlbGxlbiBhdCBtaW5pbXVtc3ZlcmRpZW4gdGlsIGlubnRla3QtdmFyaWFiZWxlbiBlciAwLgpEZXJzb20gdmkgw7huc2tlciDDpSBmaW5uZSB1dCBodm9yIG1hbmdlIGF2IGRlIG9ic2VydmVydGUgc29tIGlubmVoYXIgZGVubmUgdmVyZGllbiwga2FuIHZpIGJlbnl0dGUgZsO4bGdlbmRlOgoKYGBge3J9CnN1bShob3lkZSRpbmNvbWUgPT0gMCkKYGBgCgojIERlbCAyIC0gUmVncmVzam9uc2FuYWx5c2UKCmBgYHtyfQptb2QxIDwtICJpbm50ZWt0IH4gaG95ZGVfY20iCmxtMSA8LSBsbShtb2QxLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSkKYGBgCgpgYGB7cn0Kc3VtbWFyeSAobG0xKQpgYGAKCkhlciBzZXIgbWFuIGF0IGlubnRla3Qgw7hrZXIgbWVkIDEwMDQ3Ljkga3IgZGVyc29tIGjDuHlkZSDDuGtlciBtZWQgMSBjbS4gClRlc3Q6CgpgYGB7cn0KLTEzNjEwMDEuMCArICgxMDA0Ny45ICogMTczKQotMTM2MTAwMS4wICsgKDEwMDQ3LjkgKiAxNjEpCmBgYAoKYGBge3J9Cm1vZDIgPC0gImlubnRla3QgfiBob3lkZV9jbSArIHZla3Rfa2ciCmxtMiA8LSBsbShtb2QyLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSkKYGBgCgoKYGBge3J9CnN1bW1hcnkobG0yKQpgYGAKCkZyYSByZWdyZXNqb25zYW5hbHlzZW4gb3ZlciBzZXIgbWFuIGlubnRla3Qgw7hrZXIgdmVkIMO4a3QgaMO4eWRlLCBtZW4gc3lua2VyIHZlZCDDuGtuaW5nIGkgdmVrdC4gRGVyc29tIGjDuHlkZSDDuGtlcyBtZWQgMSBjbSBvZyB2ZWt0IHNhbXRpZGlnIMO4a2VyIG1lZCAxIGtnLCB2aWwgb2dzw6UgaW5udGVrdGVuIMO4a2UuIERldHRlIHNreWxkZXMgYXQgaW5udGVrdGVuIMO4a2VyIGJldHlkZWxpZyBtZXIgdmVkIMO4a25pbmcgaSBow7h5ZGUsIGVubiBkZW4gc3lrZXIgdmVkIHRpbHN2YXJlbmRlIMO4a25pbmcgaSB2ZWt0LgoKYGBge3J9Cm1vZDMgPC0gImlubnRla3QgfiBob3lkZV9jbSArIHZla3Rfa2cgKyBCTUkiCmxtMyA8LSBsbShtb2QzLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSkKYGBgCgpgYGB7cn0Kc3VtbWFyeShsbTMpCmBgYAoKVmlkZXJlIGZyZW1rb21tZXIgZGV0IGF0IGVuIGtvbWJpbmFzam9uIGF2IMO4a25pbmcgaSBow7h5ZGUsIHZla3Qgb2cgQk1JLCBvZ3PDpSB2aWwgZ2kgZW4gw7hrbmluZyBpIGlubmVrdC4KCgouLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLgojIyBSZWR1c2VyZSBkYXRhc2V0dGV0CgpNZWQgaGVuaG9sZCB0aWwgYXQgdmkgaGFyIGZ1bm5ldCB1dCBhdCBkYXRhc2V0dGV0IGlubmVob2xkZXIgbWFuZ2UgbWluaW11bXN2ZXJkaWVyIHDDpSAwIG9nIGF0IG1ha3NpbXVtc3ZlcmRpZW4gcMOlIDM0Myw4MzAgdXRnam9yZGUga3VuIDIlIGF2IHV0dmFsZ2V0LCBza2FsIHZpIGZqZXJuZSBkaXNzZSB2ZXJkaWVuZSBmb3Igw6Uga3VubmUga2rDuHJlIGVuIGVuZGVsaWcgbW9kZWxsIG1vdCByZWR1c2VydGUgZGF0YXNldHQuIERldHRlIGdqw7hyIHZpIGZvciDDpSB0ZXN0ZSBtb2RlbGxlbnMgcm9idXNoZXQuIAoKYGBge3J9CnNhbXBsZTE9ZmlsdGVyKGhveWRlLGluY29tZSE9MCAmIGluY29tZSE9MzQzODMwKQpgYGAKCkhlciBoYXIgdmkgb3BwcmV0dGV0IGVuIG55IG1vZGVsLCB1bmRlciBuYXZuZXQgKnNhbXBsZTEqLiBGb3Igw6Ugc2pla2tlIG9tIGRlIHJpa3RpZ2UgdmVyZGllbmUgYmxlIGZqZXJuZXQga2FuIHZpIGtqw7hyZSBlbiBueSBzdW1tZXJpbmdzdGFiZWxsLgoKYGBge3J9CnN1bW1hcnkoc2FtcGxlMSkKYGBgCgpIZXIga2FuIHZpIHNlIGF0IGLDpWRlIG1pbmltdW1zLSBvZyBtYWtpc211bXN2ZXJkaWVuIGhhciBlbmRyZXQgc2VnLiBEZXQgbnllIGRhdGFzZXR0ZXQgaW5uZWhvbGRlciBvZ3PDpSBmw6ZycmUgb2JzZXJ2YXNqb25lcjoKJCQ3MDA2LTE0My0xNzQwPTUxMjMkJApOeSAkbj01MTIzJCB0aWwgZGF0YXNldHRldCAqc2FtcGxlMSouCgojIyBNdXRlcmluZyBhdiBla3Npc3RlcmVuZGUgdmFyaWFibGVyIGZyYSBpbXBlcmlhbC0gdGlsIG1ldHJpYyBzeXN0ZW0KClNpZGVuIHZpIGJlbnl0dGVyIG9zcyBhdiBkZXQgbWV0cmlza2Ugc3lzdGVtZXQgaSBOb3JnZSBvZyBkYXRhc2V0dGV0IGhhciBicnVrdCBkZXQgaW1wZXJpc2tlLCBzw6Ugw7huc2tlciB2aSDDpSBlbmRyZSBkaXNzZSB2YXJpYWJsZW5lLiBWYXJpYWJsZW5lIGRldHRlIG9taGFuZGxlciBlciAqaGVpZ2h0KiBvZyAqd2VpZ2h0KiBzb20gdmkgc2thbCBnasO4cmUgb20gdGlsICpoZWlnaHRfY20qIG9nICp3ZWlnaHRfa2cqLiBIYXIgZnVubmV0IHV0IHDDpSBuZXR0ZXQgYXQgZW4gaW5jaCBlciAyLjU0IGNtIG9nIGVuIHB1bmQgZXIgY2EuIDAuNDUga2cuCgpgYGB7cn0KaG95ZGUgPC0gaG95ZGUgJT4lCiAgbXV0YXRlKGhlaWdodF9jbSA9IGhlaWdodCAqIDIuNTQpCmBgYAoKLSAqKlZpIGthbiB0ZXN0ZSBvbSBtdXRlcmluZ2VuIGF2ICpoZWlnaHQqIGZ1bmdlcmVyIHZlZCDDpToqKgoKYGBge3J9CiMgRmlubmUgbWFrc3ZlcmRpZW4gYXYgZGVuIG55ZSB2YXJpYWJsZW4KbWF4KGhveWRlJGhlaWdodF9jbSkKYGBgCgpgYGB7cn0KIyBWaSBrYW4gc2pla2tlIGF0IGRldHRlIHN0ZW1tZXIgdmVkIMOlIHNlIGh2YSBkZW4gaMO4eWVzdGUgaSBpbmNoZXMgZXIKbWF4KGhveWRlJGhlaWdodCkKYGBgCgpgYGB7cn0KIyBPZyBzw6UgZ2FuZ2UgbWVkIDIuNTQgc29tIHZhciBvdmVyZ2FuZ2VuIGZyYSBpbmNoZXMgdGlsIGNtCjg0KjIuNTQKYGBgCgpgYGB7cn0KIyBCcnVrZXIgc2FtbWUgZnJlbWdhbmdzbcOldGUgZm9yIHB1bmQgdGlsIGtnCmhveWRlIDwtIGhveWRlICU+JQogIG11dGF0ZSh3ZWlnaHRfa2cgPSB3ZWlnaHQgKjAuNDUpCmBgYAoKRnJhIHN1bW1lcmluZ3N0YWJlbGxlbiB0aWwgZGF0YXNldHRldCAqaG95ZGUqIGthbiB2aSBzZSBhdCB2YXJpYWJsZW4gKndlaWdodCogaGFyIGZsZXJlIE5BLXZlcmRpZXIsIGFsdHPDpSB2ZXJkaWVyIHNvbSBpa2tlIGVyIHRpbGdqZW5nZWxpZ2UuIERlcnNvbSBtYW4gw7huc2tlciDDpSBmaW5uZSB1dCBodmEgZm9yIGVrc2VtcGVsIG1ha3NpbXVtc3ZlcmRpZW4gdGlsICp3ZWlnaHRfa2cqIGVyIG3DpSBtYW4gc2tyaXZlIGbDuGxnZW5kZToKCmBgYHtyfQptYXgoaG95ZGUkd2VpZ2h0X2tnLCBuYS5ybSA9IFRSVUUpCmBgYAoKVmkgcHV0dGVyIGlubiAkbmEucm0gPSBUUlVFJCBzbGlrIGF0IFIgdXRlbGF0ZXIgY2VsbGVuZSBtZWQgYmV0ZWduZWxzZW4gKk5BKiAoTm90IGF2YWlsYWJsZSkuIERldHRlIGdqw7hyIGF0IHZpIGt1biBmw6VyIGNlbGxlbmUgbWVkIHRhbGx2ZXJkaWVyLgoKRGVyc29tIG1hbiDDuG5za2VyIMOlIGZpbm5lIHV0IG9tIGFuZHJlIHZhcmlhYmxlciBvZ3PDpSBpbm5laGFyIHZlcmRpZXIgc29tIGVyIE5BLCBrYW4gdmkgc2tyaXZlOgoKYGBge3J9CiMgRm9yIMOlIHNqZWtrZSBodmlsa2UgY2VsbGVyIHNvbSBoYXIgTkEKY29sU3Vtcyhpcy5uYShob3lkZSkpCmBgYAouLi4uLi4uLi4uLi4uLi4uLi4uLi4uCgoKCiMjIE9wcHJldHRlbHNlIGF2IG55IHZhcmlhYmVsIEJNSQoKYGBge3J9CmhveWRlIDwtIGhveWRlICU+JQogIG11dGF0ZShob3lkZSwgYm1pID0gd2VpZ2h0X2tnLyhoZWlnaHRfY20pXjIpCmBgYAoKIyMgRm9yZW5rbGV0IHV0Z2F2ZSBhdiB2YXJpYWJsZW4gbWFydGlhbAoKU2lkZW4gZHVtbXl2YXJpYWJlbCAqbWFyaXRhbCogaW5uaG9sZHQgaGVsZSA1IHVsaWtlIGZha3RvcmVyLCBzw6Ugw7huc2tlciB2aSDDpSBmb3JlbmtsZSBkZW5uZSB0aWwgZW50ZW4gIlRydWUiIGVsbGVyICJGYWxzZSIgZm9yIG9tIGluZGl2aWRldCBlciBnaWZ0IGVsbGVyIGlra2UtZ2lmdC4gCgpgYGB7cn0KaG95ZGUgPC0gaG95ZGUgJT4lCiAgbXV0YXRlKAogICAgbWFycmllZCA9IGZhY3RvcigKICAgICAgY2FzZV93aGVuKAogICAgICAgIG1hcml0YWwgPT0gIm1hcnJpZWQiIH4gVFJVRSwKICAgICAgICBUUlVFIH4gRkFMU0UKICAgICAgKQogICAgKQogICkKYGBgCgojIERlbCAzIC0gRXN0aW1lcmUgbW9kZWxsZXIKCgpgYGB7cn0KbG0xIDwtIGxtKGluY29tZSB+IGhlaWdodF9jbSwgZGF0YSA9IGhveWRlLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmxtMiA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20gKyB3ZWlnaHRfa2cgKyBlZHVjYXRpb24sIGRhdGEgPSBob3lkZSwgc3Vic2V0ID0gY29tcGxldGUuY2FzZXMoaG95ZGUpKQpsbTMgPC0gbG0oaW5jb21lIH4gaGVpZ2h0X2NtICsgc2V4ICsgYWdlICsgZWR1Y2F0aW9uLCBkYXRhID0gaG95ZGUsIHN1YnNldCA9IGNvbXBsZXRlLmNhc2VzKGhveWRlKSkKYGBgCgojIyBUZXN0IGludGVyYWtzam9uCgpgYGB7cn0KbV9lZHVjc2V4X2kgPC0gImluY29tZSB+IGVkdWNhdGlvbipzZXgiCmxtX2VkdWNzZXhfaSA8LSBsbShtX2VkdWNzZXhfaSwgZGF0YSA9IGhveWRlKQpgYGAKCmBgYHtyfQpzdW1tYXJ5KGxtX2VkdWNzZXhfaSkKYGBgCgpgYGB7cn0Kc3VtbWFyeShsbTIpCmBgYAoKYGBge3J9CmxpYnJhcnkoaHV4dGFibGUpCmBgYAoKYGBge3J9Cmh1eHJlZyhsbTEsIGxtMiwgbG0zKQpgYGAKCiMjIFJlZHVzZXJ0IGRhdGFzZXR0CgoKYGBge3J9CiMgTGVnZ2UgdGlsIGhlaWdodF9jbSBpIHJlZHVzZXJ0IGRhdGFzZXR0IChzYW1wbGUxKQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKGhlaWdodF9jbSA9IGhlaWdodCAqIDIuNTQpCmBgYAoKYGBge3J9CiMgTGVnZ2UgdGlsIHdlaWdodF9rZyBpIHJlZHVzZXJ0IGRhdGFzZXR0IChzYW1wbGUxKQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKHdlaWdodF9rZyA9IHdlaWdodCAqMC40NSkKYGBgCgpgYGB7cn0KIyBMZWdnZSB0aWwgYm1pIGkgc2FtcGxlMQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKHNhbXBsZTEsIGJtaSA9IHdlaWdodF9rZy8oaGVpZ2h0X2NtKV4yKQpgYGAKCmBgYHtyfQojIExlZ2dlIHRpbCBmb3JlbmtsZXQgdXRnYXZlIGF2IG1hcnJpdGFsIGkgc2FtcGxlMQpzYW1wbGUxIDwtIHNhbXBsZTEgJT4lCiAgbXV0YXRlKAogICAgbWFycmllZCA9IGZhY3RvcigKICAgICAgY2FzZV93aGVuKAogICAgICAgIG1hcml0YWwgPT0gIm1hcnJpZWQiIH4gVFJVRSwKICAgICAgICBUUlVFIH4gRkFMU0UKICAgICAgKQogICAgKQogICkKYGBgCgoKYGBge3J9CmxtNCA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20sIGRhdGEgPSBzYW1wbGUxLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmxtNSA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20gKyB3ZWlnaHRfa2cgKyBlZHVjYXRpb24sIGRhdGEgPSBzYW1wbGUxLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmxtNiA8LSBsbShpbmNvbWUgfiBoZWlnaHRfY20gKyBzZXggKyBhZ2UgKyBlZHVjYXRpb24sIGRhdGEgPSBzYW1wbGUxLCBzdWJzZXQgPSBjb21wbGV0ZS5jYXNlcyhob3lkZSkpCmBgYAoKYGBge3J9CnN1bW1hcnkobG01KQpgYGAKCmBgYHtyfQpodXhyZWcobG00LCBsbTUsIGxtNikKYGBgCgpgYGB7cn0KaHV4cmVnKAogIGxpc3QoIk1vZGVsbCAxIiA9IGxtMSwgIk1vZGVsbCA0IiA9IGxtNCksCiAgZXJyb3JfZm9ybWF0ID0gIlt7c3RhdGlzdGljfV0iLAogIG5vdGUgPSAiUmVncmVzam9uc3RhYmVsbCAxOiB7c3RhcnN9LiBUIHN0YXRpc3RpY3MgaW4gYnJhY2tldHMuIgopCmBgYAoKYGBge3J9Cmh1eHJlZygKICBsaXN0KCJNb2RlbGwgMiIgPSBsbTIsICJNb2RlbGwgNSIgPSBsbTUpLAogIGVycm9yX2Zvcm1hdCA9ICJbe3N0YXRpc3RpY31dIiwKICBub3RlID0gIlJlZ3Jlc2pvbnN0YWJlbGwgMjoge3N0YXJzfS4gVCBzdGF0aXN0aWNzIGluIGJyYWNrZXRzLiIKKQpgYGAKCmBgYHtyfQpodXhyZWcoCiAgbGlzdCgiTW9kZWxsIDMiID0gbG0zLCAiTW9kZWxsIDYiID0gbG02KSwKICBlcnJvcl9mb3JtYXQgPSAiW3tzdGF0aXN0aWN9XSIsCiAgbm90ZSA9ICJSZWdyZXNqb25zdGFiZWxsIDM6IHtzdGFyc30uIFQgc3RhdGlzdGljcyBpbiBicmFja2V0cy4iCikKYGBgCgojIyBJbnRlcmFrc2pvbiBww6UgcmVkdXNlcnQgZGF0YXNldHQKCmBgYHtyfQptX2VkdWNzZXhfaSA8LSAiaW5jb21lIH4gZWR1Y2F0aW9uKnNleCIKbG1fZWR1Y3NleF9pSSA8LSBsbShtX2VkdWNzZXhfaSwgZGF0YSA9IHNhbXBsZTEpCmBgYAoKYGBge3J9CnN1bW1hcnkobG1fZWR1Y3NleF9pSSkKYGBgCgpgYGB7cn0KbGlicmFyeShjYXIpCmBgYAoKYGBge3J9CnN1bW1hcnkobG02KQpgYGAKCgoK</div>
 
 
 
