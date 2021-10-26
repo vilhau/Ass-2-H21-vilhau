@@ -9,6 +9,8 @@ output:
 
 # Del 1 - Innledning
 
+Bare en liten test.
+
 ## Kort innledning
 
 ## Kort litteraturgjennomgang på ca. 1 side
