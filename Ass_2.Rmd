@@ -5,6 +5,7 @@ date: "Oktober 14. 2021"
 output:
   pdf_document: default
   html_notebook: default
+lang: no-NB
 ---
 
 # Del 1 - Innledning
@@ -15,11 +16,20 @@ Bare en liten test.
 
 ## Kort litteraturgjennomgang på ca. 1 side
 
-```{r}
+```{r setup}
 library(modelr)
 library(dplyr)
 library(ggplot2)
+library(tinytex)
+library(tidyverse)
+library(ggpubr)
+library(huxtable)
+options(scipen = 999)
 ```
+
+## Analyse
+
+Vi lager først et histogram med inntekts-variabel. 
 
 ```{r}
 # Endrer navn på datasettet fra heights til hoyde
@@ -33,27 +43,42 @@ I datasettet hoyde har vi $n=7006$, som vil si at settet består av totalt 7006 
 
 ## EDA
 
-- **Histogram**
+- **Histogram til variabelen innekt**
+Til å begynne med lages tre nye variabler som settes til en metrisk standard.
 
 ```{r}
-hist(hoyde$income, breaks = 100)
+hoyde <- hoyde %>%
+  mutate(inntekt = income * 8.42,
+         hoyde_cm = height * 2.54,
+         vekt_kg = weight * 0, 454,
+         BMI = vekt_kg / (hoyde_cm/100)^2)
+```
+
+
+```{r}
+ggplot(data = hoyde, aes(x = inntekt)) + 
+  geom_histogram()
+  geom_histogram(bins = 30)
+  
 ```
 
 - **Forklaring på utliggerne langt til høyre**
 
-For å forklare utliggerne langt til høyere, kan vi begynne med å finne ut hva maksimumsverdien av variablen *income* er.
+Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt.
+For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen *income*.
 
 ```{r}
 summary(hoyde)
 ```
 
-Fra summeringstabellen ser vi at maksimumsverdien til variablen *income* er 343,830. Videre kan vi undersøke hvor mange av de observerte som innehar denne verdien.
+Fra summeringstabellen ser vi at maksimumsverdien til variablen *income* er 343,830. Videre kan vi undersøke hvor mange av observasjonene
+som innehar denne verdien.
 
 ```{r}
 sum(hoyde$income == 343830)
 ```
 
-Totalt var det 7006 observasjoner og med hensyn til at 143 hadde maksimumsverdien og at det er en relativt stor avstand mellom maksinntekten og medianen til datasettet, kan vi si at utliggerne til høyere representerer ca. 2% av det totale utvalget.
+Totalt var det 7006 observasjoner og med hensyn til at 143 hadde maksimumsverdien og at det er en relativt stor avstand mellom maksinntekten og medianen til datasettet, kan vi si at utliggerne til høyere representerer et gjennomsnitt av ca. 2% av det totale utvalget.
 
 ```{r}
 (143/7006)*100
@@ -161,9 +186,9 @@ hoyde <- hoyde %>%
 
 
 ```{r}
-lm1 <- lm(income ~ height_cm, data = hoyde )
-lm2 <- lm(income ~ height_cm + weight_kg + education, data = hoyde)
-lm3 <- lm(income ~ height_cm + sex + age + education, data = hoyde)
+lm1 <- lm(income ~ height_cm, data = hoyde, subset = complete.cases(hoyde))
+lm2 <- lm(income ~ height_cm + weight_kg + education, data = hoyde, subset = complete.cases(hoyde))
+lm3 <- lm(income ~ height_cm + sex + age + education, data = hoyde, subset = complete.cases(hoyde))
 ```
 
 ## Test interaksjon
@@ -225,9 +250,9 @@ sample1 <- sample1 %>%
 
 
 ```{r}
-lm4 <- lm(income ~ height_cm, data = sample1)
-lm5 <- lm(income ~ height_cm + weight_kg + education, data = sample1)
-lm6 <- lm(income ~ height_cm + sex + age + education, data = sample1)
+lm4 <- lm(income ~ height_cm, data = sample1, subset = complete.cases(hoyde))
+lm5 <- lm(income ~ height_cm + weight_kg + education, data = sample1, subset = complete.cases(hoyde))
+lm6 <- lm(income ~ height_cm + sex + age + education, data = sample1, subset = complete.cases(hoyde))
 ```
 
 ```{r}
