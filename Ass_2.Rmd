@@ -4,9 +4,227 @@ author: "Christoffersen J. & Haugland V."
 date: "Oktober 14. 2021"
 output:
   pdf_document: default
+  html_document:
+    df_print: paged
   html_notebook: default
 lang: no-NB
 ---
 
 
+
+# Del 1 - Innledning
+
+Bare en liten test.
+
+## Kort innledning
+
+## Kort litteraturgjennomgang på ca. 1 side
+
+```{r setup}
+library(modelr)
+library(dplyr)
+library(ggplot2)
+library(tinytex)
+library(tidyverse)
+library(ggpubr)
+library(huxtable)
+options(scipen = 999)
+```
+
+## Analyse
+
+Vi lager først et histogram med inntekts-variabel. 
+
+```{r}
+# Endrer navn på datasettet fra heights til hoyde
+data("heights", package = "modelr")
+hoyde <- heights
+```
+
+## Beskrivende statistikk
+
+I datasettet hoyde har vi $n=7006$, som vil si at settet består av totalt 7006 ulike observasjoner. Videre har vi de 7 uavhengige variabelene *høyde*, *vekt*, *alder*, *sivilstatus*, *kjønn*, *utdannelse* og *afqt* (Score fra forvarets kvalifiseringstest), som bestemmer den avhengige variablen *inntekt* i dette settet. Hvorav variablene *sivilstatus* og *kjønn* er såkalte dummyvariabler. *Sivilstatus* varier med fem ulike faktorer som er *singel*, *gift*, *separert*, *skilt* og *enke* og dummyvariablen *kjønn* varier mellom tallet 1 og 2 som bestemmer om individet som er observert er enten mann eller kvinne.
+
+## EDA
+
+- **Histogram til variabelen innekt**
+Til å begynne med lages tre nye variabler som settes til en metrisk standard.
+
+```{r}
+hoyde <- hoyde %>%
+  mutate(inntekt = income * 8.42,
+         hoyde_cm = height * 2.54,
+         vekt_kg = weight * 0.454,
+         BMI = vekt_kg / (hoyde_cm/100)^2)
+```
+
+
+```{r}
+ggplot(data = hoyde, aes(x = inntekt)) + 
+  geom_histogram()
+  geom_histogram(bins = 30)
+  
+```
+
+- **Forklaring på utliggerne langt til høyre**
+
+Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt.
+For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen *inntekt*.
+
+```{r}
+summary(hoyde)
+```
+
+Fra summeringstabellen ser vi at maksimumsverdien til variablen *inntekt* er 343,830. Videre kan vi undersøke hvor mange av observasjonene
+som innehar denne verdien.
+
+```{r}
+sum(hoyde$income == 343830)
+```
+
+Totalt var det 7006 observasjoner og med hensyn til at 143 hadde maksimumsverdien og at det er en relativt stor avstand mellom maksinntekten og medianen til datasettet, kan vi si at utliggerne til høyere representerer et gjennomsnitt av ca. 2% av det totale utvalget.
+
+```{r}
+(143/7006)*100
+```
+
+Dersom datasettet reduseres for topp 2% høyeste inntekt og inntekt lik 0, ser histogrammet slik ut:
+
+```{r}
+hoyde_begr <- hoyde %>%
+  filter(inntekt < 1500000,
+         inntekt > 1)
+```
+
+```{r}
+ggplot(data = hoyde_begr, aes(x = inntekt)) + 
+  geom_histogram()
+```
+
+- **Har vi med personer uten inntekt i datasettet?**
+
+Ja. Datasettet inneholder observasjoner av en rekke individer uten inntekt. Dette fremkommer av histogrammet til variabelen inntekt hvor $<1500$ er frekvensen til 0 langs x-aksen.
+Det fremkommer også av hoyde-summeringstabellen at minimumsverdien til inntekt-variabelen er 0.
+Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verdien, kan vi benytte følgende:
+
+```{r}
+sum(hoyde$income == 0)
+```
+
+# Del 2 - Regresjonsanalyse
+
+```{r}
+mod1 <- "inntekt ~ hoyde_cm"
+lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary (lm1)
+```
+
+Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med 1 cm. 
+Test:
+
+```{r}
+-1361001.0 + (10047.9 * 173)
+-1361001.0 + (10047.9 * 161)
+```
+
+```{r}
+mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
+lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
+```
+
+
+```{r}
+summary(lm2)
+```
+
+Fra regresjonsanalysen over ser man inntekt øker ved økt høyde, men synker ved økning i vekt. Dersom høyde økes med 1 cm og vekt samtidig øker med 1 kg, vil også inntekten øke. Dette skyldes at inntekten øker betydelig mer ved økning i høyde, enn den syker ved tilsvarende økning i vekt.
+
+```{r}
+mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
+lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
+```
+
+```{r}
+summary(lm3)
+```
+
+Videre fremkommer det at en kombinasjon av økning i høyde, vekt og BMI, også vil gi en økning i innekt.
+
+
+## Forenklet utgave av variablen martial
+
+Siden dummyvariabel *marital* innholdt hele 5 ulike faktorer, så forenkles denne til enten "True" eller "False" for om individet er gift eller ikke-gift. 
+
+```{r}
+hoyde <- hoyde %>%
+  mutate(
+    married = factor(
+      case_when(
+        marital == "married" ~ TRUE,
+        TRUE ~ FALSE
+      )
+    )
+  )
+```
+
+## Resultat fra estimering rapporteres vha. huxreg
+
+```{r}
+huxreg(list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
+       error_format = "[{statistic}]",
+       note = "Regresjonstabell 3: {stars}. T statistics in brackets."
+       )
+```
+
+## Modell med interaksjonsvariabel
+
+```{r}
+mod4 <- "inntekt ~ sex*hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
+lm4 <- lm(mod4, data = hoyde)
+summary(lm4)
+```
+
+## Modell med flere variasjonsvariabler
+
+```{r}
+mod5 <- "inntekt ~ sex*(hoyde_cm + vekt_kg + I(vekt_kg^2)) + BMI + I(BMI^2)"
+lm5 <- lm(mod5, data = hoyde)
+summary(lm5)
+```
+
+## Tester modellen med redusert datasett
+
+```{r}
+mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
+lm5 <- lm(mod3, data = hoyde_begr, subset = complete.cases(hoyde))
+summary(lm5)
+```
+
+## Legger til residualer
+
+```{r}
+hoyde_begr <- hoyde %>%
+  add_residuals(lm5)
+hoyde_begr %>% 
+  head(n=10)
+```
+## Samtlige observasjoner
+
+```{r}
+ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
+  geom_point(
+    data = hoyde_begr,
+    mapping = aes(x = hoyde_cm, y = resid),
+    colour = "grey40",
+    size = 0.3
+  ) + 
+  facet_grid(sex ~ factor(married, labels = c("not married", "married")))
+```
+
+## Konklusjon
+
+Fra testene fremkommer det at høyde ikke bestemmer inntekt. Det fremkommer dog at menn tjener mer enn kvinner.
 
