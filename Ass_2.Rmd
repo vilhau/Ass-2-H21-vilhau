@@ -206,6 +206,7 @@ hoyde_begr <- hoyde %>%
   add_residuals(lm5)
 hoyde_begr
 ```
+## Samtlige observasjoner
 
 ```{r}
 ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
@@ -219,8 +220,4 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
 ```
 
 
-```{r}
-
-facet_grid(sex ~ factor(married, labels = c(“not married,” “married”)))
-```
 
