@@ -13,8 +13,7 @@ lang: no-NB
 
 
 # Del 1 - Innledning
-
-Bare en liten test.
+test
 
 ## Kort innledning
 
