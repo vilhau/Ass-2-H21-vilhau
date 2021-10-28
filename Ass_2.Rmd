@@ -13,9 +13,13 @@ lang: no-NB
 
 
 # Del 1 - Innledning
-test
+
 
 ## Kort innledning
+
+I denne oppgaven skal det forskes på om høyde er en bestemmende faktor for personers inntekt. I første del av oppgaven presenteres en litteratur gjennomgang og beskrivende statistikk.
+Videre benyttes datasettet **heights** for å analysere ulike variabler og undersøke betydningen av høyde i forhold til inntekt. Gjennom oppgaven utformes forklarende modeller og regresjonsanalyser.
+Resultatet av oppgaven fremstilles avsluttningsvis i en konklusjon.
 
 ## Kort litteraturgjennomgang på ca. 1 side
 
@@ -42,11 +46,20 @@ hoyde <- heights
 
 ## Beskrivende statistikk
 
-I datasettet hoyde har vi $n=7006$, som vil si at settet består av totalt 7006 ulike observasjoner. Videre har vi de 7 uavhengige variabelene *høyde*, *vekt*, *alder*, *sivilstatus*, *kjønn*, *utdannelse* og *afqt* (Score fra forvarets kvalifiseringstest), som bestemmer den avhengige variablen *inntekt* i dette settet. Hvorav variablene *sivilstatus* og *kjønn* er såkalte dummyvariabler. *Sivilstatus* varier med fem ulike faktorer som er *singel*, *gift*, *separert*, *skilt* og *enke* og dummyvariablen *kjønn* varier mellom tallet 1 og 2 som bestemmer om individet som er observert er enten mann eller kvinne.
+I datasettet hoyde har vi $n=7006$, som vil si at settet består av totalt 7006 ulike observasjoner. Videre har vi de 7 uavhengige variabelene *høyde*, *vekt*, *alder*, *sivilstatus*, *kjønn*, *utdannelse* og *afqt* (score fra forvarets kvalifiseringstest), som bestemmer den avhengige variablen *inntekt* i dette settet. Hvorav variablene *sivilstatus* og *kjønn* er såkalte dummyvariabler. *Sivilstatus* varier med fem ulike faktorer som er *singel*, *gift*, *separert*, *skilt* og *enke* og dummyvariablen *kjønn* varier mellom tallet 1 og 2 som bestemmer om individet som er observert er enten mann eller kvinne.
 
-## EDA
+**I datasettet er variablene oppgitt på engelsk:**
+* Heights = høyde oppgitt i tommer
+* Income = Oppgir årlig inntekt. Det er gjort et gjennomsnitt for å presentere topp 2% høyeste inntekt.
+* Weight = Oppgir vekt i enheten pounds
+* Age = Oppgir alder i antall år fra 47 til 56 år.
+* Martial = Oppgir sivilstatus
+* Sex = Kjønn. Mann/Kvinne
+* Education = Oppgir antall år utdanning
+* AFGT= Score fra forvarets kvalifiseringstest
 
-- **Histogram til variabelen innekt**
+## Forklarende dataanalyse
+
 Til å begynne med lages tre nye variabler som settes til en metrisk standard.
 
 ```{r}
@@ -57,6 +70,7 @@ hoyde <- hoyde %>%
          BMI = vekt_kg / (hoyde_cm/100)^2)
 ```
 
+## Histogram til inntektsvariabelen
 
 ```{r}
 ggplot(data = hoyde, aes(x = inntekt)) + 
@@ -110,7 +124,9 @@ Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verd
 sum(hoyde$income == 0)
 ```
 
-# Del 2 - Regresjonsanalyse
+# Del 2 - Regresjonsanalyser
+
+## Regresjonsanalyse: inntekt og høyde
 
 ```{r}
 mod1 <- "inntekt ~ hoyde_cm"
@@ -121,13 +137,15 @@ lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
 summary (lm1)
 ```
 
-Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med 1 cm. 
+* Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med 1 cm. 
 Test:
 
 ```{r}
--1361001.0 + (10047.9 * 173)
--1361001.0 + (10047.9 * 161)
+-1361001.0 + (10047.9 * 185)
+-1361001.0 + (10047.9 * 177)
 ```
+
+## Regresjonsanalyse: inntekt, høyde & vekt
 
 ```{r}
 mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
@@ -140,6 +158,8 @@ summary(lm2)
 ```
 
 Fra regresjonsanalysen over ser man inntekt øker ved økt høyde, men synker ved økning i vekt. Dersom høyde økes med 1 cm og vekt samtidig øker med 1 kg, vil også inntekten øke. Dette skyldes at inntekten øker betydelig mer ved økning i høyde, enn den syker ved tilsvarende økning i vekt.
+
+## Regresjonsanalyse: inntekt, høyde, vekt & BMI
 
 ```{r}
 mod3 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
@@ -178,13 +198,19 @@ huxreg(list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
        )
 ```
 
+Huwreg modellen over viser en samlet fremstilling av de presenterte modellene.
+
 ## Modell med interaksjonsvariabel
+
+Videre legges det til en interaksjon for variabelen "sex".
 
 ```{r}
 mod4 <- "inntekt ~ sex*hoyde_cm + vekt_kg + I(vekt_kg^2) + BMI + I(BMI^2)"
 lm4 <- lm(mod4, data = hoyde)
 summary(lm4)
 ```
+
+Fra analysen fremkommer det at dummyvariabelen for sexfemale og interaksjonsvariablene er signifikant.
 
 ## Modell med flere variasjonsvariabler
 
@@ -194,7 +220,17 @@ lm5 <- lm(mod5, data = hoyde)
 summary(lm5)
 ```
 
-## Tester modellen med redusert datasett
+## Test av koeffisienter vha. linearHypothesis
+
+```{r}
+linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0"))
+```
+
+
+
+## Tester endelig modell med redusert datasett
+
+Videre utformes den endelige modellen ved datasett redusert for topp 2% inntekt og inntekt lik 0.
 
 ```{r}
 mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
@@ -222,6 +258,7 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
   ) + 
   facet_grid(sex ~ factor(married, labels = c("not married", "married")))
 ```
+Videre fremkommer det at en total av residualene motsier den endelige modellen, og at høyde ikke nødvendigvis har en reell påvirkning på inntekt. 
 
 ## Konklusjon
 
