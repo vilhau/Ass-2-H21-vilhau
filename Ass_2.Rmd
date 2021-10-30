@@ -8,36 +8,102 @@ output:
     df_print: paged
   html_notebook: default
 lang: no-NB
+editor_options: 
+  markdown: 
+    wrap: 72
+bibliography: references.bib
 ---
-
-
 
 # Del 1 - Innledning
 
 ## Kort innledning
 
-Det eksisterer en mengde ulike faktorer som vil være med på å bestemme et individs inntekt. For eksempel, i tilskrivnings-kulturer som Japan er status noe som blir tildelt for hvem eller hva en person er, framfor hvordan de utfører sine oppgaver. Dette er et nokså bredt eksempel på tvers av kulturer, men forskning har vist at det er en rekke biologiske faktorer som bestemmer hvordan vi mennesker tildeler status og annerkjennelse, ergo hvor mye individer kan forvente å tjene. Disse faktorene vil ikke være absolutt avgjørende, men de har tendenser til å være bestemmende for inntekt. I denne oppgaven skal det forskes på om høyde er en bestemmende faktor for personers inntekt. I første del av oppgaven presenteres en litteratur gjennomgang og beskrivende statistikk. For å belyse denne problemstillingen skal vi benytte oss av datasettet *heights* fra R-pakken *modlr*, og gjennomføre en rekke ulike regresjonsanalyser med henhold til hvordan *høyde* og en rekke andre variabler påvirker inntekten. Resultatene fra disse analysene skal videre benyttes til lineære hypotesetester, hvor vi skal undersøke og konkludere variablen *høyde* sin effekt på inntekt.
-Resultatet av oppgaven fremstilles avsluttningsvis i en konklusjon.
+Det eksisterer en mengde ulike faktorer som vil være med på å bestemme
+et individs inntekt. For eksempel, i tilskrivnings-kulturer som Japan er
+status noe som blir tildelt for hvem eller hva en person er, framfor
+hvordan de utfører sine oppgaver. Dette er et nokså bredt eksempel på
+tvers av kulturer, men forskning har vist at det er en rekke biologiske
+faktorer som bestemmer hvordan vi mennesker tildeler status og
+annerkjennelse, ergo hvor mye individer kan forvente å tjene. Disse
+faktorene vil ikke være absolutt avgjørende, men de har tendenser til å
+være bestemmende for inntekt. I denne oppgaven skal det forskes på om
+høyde er en bestemmende faktor for personers inntekt. I første del av
+oppgaven presenteres en litteratur gjennomgang og beskrivende
+statistikk. For å belyse denne problemstillingen skal vi benytte oss av
+datasettet *heights* fra R-pakken *modlr*, og gjennomføre en rekke ulike
+regresjonsanalyser med henhold til hvordan *høyde* og en rekke andre
+variabler påvirker inntekten. Resultatene fra disse analysene skal
+videre benyttes til lineære hypotesetester, hvor vi skal undersøke og
+konkludere variablen *høyde* sin effekt på inntekt. Resultatet av
+oppgaven fremstilles avsluttningsvis i en konklusjon.
 
+## Kort litteraturgjennomgang
 
-## Kort litteraturgjennomgang på ca. 1 side
+For å anskaffe en bredere forståelse av dette fenomenet med høyde sin
+påvirkning på individets inntekt, skal vi kort gjennomgå artikkelen *The
+Effect of Physical Hieght on Workplace Sucess and Income: Prelimitary
+Test of a Theoretical Model*. Her undersøkte de forholdet mellom høyde
+og hvilken type karrieresuksess individene hadde. Resultatene fremviste
+at fysisk høyde har en signifikant påvirkning på individets sosiale
+aktelse, ledelse fremheving og ytelse[@judge2004].
 
-For å anskaffe en bredere forståelse av dette fenomenet med høyde sin påvirkning på individets inntekt, skal vi kort gjennomgå artikkelen *The Effect of Physical Hieght on Workplace Sucess and Income: Prelimitary Test of a Theoretical Model*. Her undersøkte de forholdet mellom høyde og hvilken type karrieresuksess individene hadde. Resultatene fremviste at fysisk høyde har en signifikant påvirkning på individets sosiale aktelse, ledelse fremheving og ytelse **(Judge et al., 2004)** 
+Det eksisterer mange underliggende faktorerer som er med på å påvirke
+hvorfor høyde er så ønskelig. For det første er høye individer ansett
+som potensielt mer suksessfulle enn de som er lavere. En grunn til dette
+er at høyde er en sosialt ønskelig ressurs med mange goder. For
+eksempel, vil de som er høye bli betraktet som mer overbevisende, mer
+attraktiv som partner og ha en større sannsynlighet for å bli en
+fremtidig leder. For å illustrere sistnevnte, så kan vi se at det ikke
+har blitt utvalgt en president i USA som er lavere enn den
+gjennomsnittlige høyden helt siden 1896 [@judge2004]. Høydens viktighet
+er ikke bare observert blant mennesker, men vi ser den også i dyreriket.
+For dyrene er høyde noe som er svært enkelt å observere og dermed blir
+brukt som en indeks for dens makt og styrke, noe som spesielt fremvises
+i livstruende situasjoner. Vi kan dermed si fra et slikt sosiobiologisk
+perspektiv, at høyde vil tilegne seg makt og makt er noe som videre
+fører til respekt. I jobbsammenhenger kan høydens viktighet bli fremvist
+tydligere, med henhold til at dette er en arena hvor faktorer som
+overtalelse og makt er ansett som uhyrlig viktige. Det er gjennomført
+flere ulike undersøkelser på høyde innen jobbsammenhenger og de viser
+blant annet betyningen når det kommer til hvordan høye salgspersoner
+blir betraktet i større grad og at lave politibetjenter kan forvente en
+større grad av klager enn høye politbetjenter [@judge2004].
 
-Det eksisterer mange underliggende faktorerer som er med på å påvirke hvorfor høyde er så ønskelig. For det første er høye individer ansett som potensielt mer suksessfulle enn de som er lavere. En grunn til dette er at høyde er en sosialt ønskelig ressurs med mange goder. For eksempel, vil de som er høye bli betraktet som mer overbevisende, mer attraktiv som partner og ha en større sannsynlighet for å bli en fremtidig leder. For å illustrere sistnevnte, så kan vi se at det ikke har blitt utvalgt en president i USA som er lavere enn den gjennomsnittlige høyden helt siden 1896 **(Judge et al., 2004)**. Høydens viktighet er ikke bare observert blant mennesker, men vi ser den også i dyreriket. For dyrene er høyde noe som er svært enkelt å observere og dermed blir brukt som en indeks for dens makt og styrke, noe som spesielt fremvises i livstruende situasjoner. Vi kan dermed si fra et slikt sosiobiologisk perspektiv, at høyde vil tilegne seg makt og makt er noe som videre fører til respekt. I jobbsammenhenger kan høydens viktighet bli fremvist tydligere, med henhold til at dette er en arena hvor faktorer som overtalelse og makt er ansett som uhyrlig viktige. Det er gjennomført flere ulike undersøkelser på høyde innen jobbsammenhenger og de viser blant annet betyningen når det kommer til hvordan høye salgspersoner blir betraktet i større grad og at lave politibetjenter kan forvente en større grad av klager enn høye politbetjenter **(Judge et al., 2004)**.
+For å forstå disse underliggende faktorene til høyde kan vi benytte den
+teoretiske modellen for forholdet mellom høyde og karriere til å
+forklare dette sosiale fenomenet. For det første vil høyde ha en stor
+betydning for hvordan vi betrakter oss selv, altså vår selvtillit og
+selvfølelse. Med henhold til at høyde er sterkt korrelert med sosial
+makt, vil lave individer stå i fare for å være misfornøyde med sin
+fysiske form, og denne usikkerheten vil være med på å påvirke
+personligheten deres. Et ekstremt eksempel på dette vil være det som
+kalles *Napoleon kompleks*, hvor individets høyde har så stor negativ
+betydning som fører til at denne mangelen på høyde fører til at man
+føler seg utilstrekkelig som individ, som resulterer i en svært aggresiv
+opptreden [@just2003].
 
-For å forstå disse underliggende faktorene til høyde kan vi benytte den teoretiske modellen for forholdet mellom høyde og karriere til å forklare dette sosiale fenomenet. For det første vil høyde ha en stor betydning for hvordan vi betrakter oss selv, altså vår selvtillit og selvfølelse. Med henhold til at høyde er sterkt korrelert med sosial makt, vil lave individer stå i fare for å være misfornøyde med sin fysiske form, og denne usikkerheten vil være med på å påvirke personligheten deres. Et ekstremt eksempel på dette vil være det som kalles *Napoleon kompleks*, hvor individets høyde har så stor negativ betydning som fører til at denne mangelen på høyde fører til at man føler seg utilstrekkelig som individ, som resulterer i en svært aggresiv opptreden **(Just et al., 2003)**
+Høyde vil i likhet med selvtillitten påvirke hvordan individet vil bli
+betraktet av andre, altså den sosiale aktelsen. For eksempel, vil dette
+i stor grad føre til høyere objektiv ytelse, som er jobb eller oppgave
+utfall og resultater. Noe som kan spesielt observeres i situasjoner hvor
+sosiale interaksjoner er ansett som viktige. Dette kan fremvises ved at
+kunder tenderer til å gi mer betraktning mot høye individer, som gjør at
+de i større grad kommer kjøpe av en høy salgsperson. Denne berudringen
+vil også være essensiell i andre sammenehenger, slikt som å opprette
+tillit, motta informasjon og mer effektiv forhandling [@judge2004], som
+vil resultere i økt effektivitet og ytelse. Individets egne selvtilitt
+vil også ha en stor påvirkning på ytelsen. En positiv selvtillitt er
+nært knyttet til høyere ytelse ved at slike individer gjerne blir ansett
+som mer gunstige og er dermed lettere likt blant andre.
 
-Høyde vil i likhet med selvtillitten påvirke hvordan individet vil bli betraktet av andre, altså den sosiale aktelsen. For eksempel, vil dette i stor grad føre til høyere objektiv ytelse, som er jobb eller oppgave utfall og resultater. Noe som kan spesielt observeres i situasjoner hvor sosiale interaksjoner er ansett som viktige. Dette kan fremvises ved at kunder tenderer til å gi mer betraktning mot høye individer, som gjør at de i større grad kommer kjøpe av en høy salgsperson. Denne berudringen vil også være essensiell i andre sammenehenger, slikt som å opprette tillit, motta informasjon og mer effektiv forhandling **(Judge et al., 2004)**, som vil resultere i økt effektivitet og ytelse. Individets egne selvtilitt vil også ha en stor påvirkning på ytelsen. En positiv selvtillitt er nært knyttet til høyere ytelse ved at slike individer gjerne blir ansett som mer gunstige og er dermed lettere likt blant andre. 
+Det siste steget i modellen forklarer hvordan denne ytelsen vil ha en
+påvirkning på videre suksess i karrieren. Med den økte sosiale aktelsen
+og selvtilittien det høye individet innehar, vil resultere i høyere
+ytelse. Denne ytelsen gjennom mer effektiv produktiviet vil dermed føre
+til organisatoriske belønninger som blant annet høyere lønninger og
+forfremmelser.
 
-Det siste steget i modellen forklarer hvordan denne ytelsen vil ha en påvirkning på videre suksess i karrieren. Med den økte sosiale aktelsen og selvtilittien det høye individet innehar, vil resultere i høyere ytelse. Denne ytelsen gjennom mer effektiv produktiviet vil dermed føre til organisatoriske belønninger som blant annet høyere lønninger og forfremmelser.
-
-- Judge, T. A., & Cable, D. M. (2004). The effect of physical height on workplace success and income: preliminary test of a theoretical model. Journal of Applied Psychology, 89(3), 428.
-
-- Just, W., & Morris, M. R. (2003). The Napoleon complex: why smaller males pick fights. Evolutionary Ecology, 17(5), 509-522.
-
-
-
+## Pakker
 
 ```{r setup}
 library(modelr)
@@ -52,7 +118,7 @@ options(scipen = 999)
 
 ## Analyse
 
-Vi lager først et histogram med inntekts-variabel. 
+Vi lager først et histogram med inntekts-variabel.
 
 ```{r}
 # Endrer navn på datasettet fra heights til hoyde
@@ -62,21 +128,29 @@ hoyde <- heights
 
 ## Beskrivende statistikk
 
-I datasettet hoyde har vi $n=7006$, som vil si at settet består av totalt 7006 ulike observasjoner. Videre har vi de 7 uavhengige variabelene *høyde*, *vekt*, *alder*, *sivilstatus*, *kjønn*, *utdannelse* og *afqt* (score fra forvarets kvalifiseringstest), som bestemmer den avhengige variablen *inntekt* i dette settet. Hvorav variablene *sivilstatus* og *kjønn* er såkalte dummyvariabler. *Sivilstatus* varier med fem ulike faktorer som er *singel*, *gift*, *separert*, *skilt* og *enke* og dummyvariablen *kjønn* varier mellom tallet 1 og 2 som bestemmer om individet som er observert er enten mann eller kvinne.
+I datasettet hoyde har vi $n=7006$, som vil si at settet består av
+totalt 7006 ulike observasjoner. Videre har vi de 7 uavhengige
+variabelene *høyde*, *vekt*, *alder*, *sivilstatus*, *kjønn*,
+*utdannelse* og *afqt* (score fra forvarets kvalifiseringstest), som
+bestemmer den avhengige variablen *inntekt* i dette settet. Hvorav
+variablene *sivilstatus* og *kjønn* er såkalte dummyvariabler.
+*Sivilstatus* varier med fem ulike faktorer som er *singel*, *gift*,
+*separert*, *skilt* og *enke* og dummyvariablen *kjønn* varier mellom
+tallet 1 og 2 som bestemmer om individet som er observert er enten mann
+eller kvinne.
 
-**I datasettet er variablene oppgitt på engelsk:**
-* Heights = høyde oppgitt i tommer
-* Income = Oppgir årlig inntekt. Det er gjort et gjennomsnitt for å presentere topp 2% høyeste inntekt.
-* Weight = Oppgir vekt i enheten pounds
-* Age = Oppgir alder i antall år fra 47 til 56 år.
-* Martial = Oppgir sivilstatus
-* Sex = Kjønn. Mann/Kvinne
-* Education = Oppgir antall år utdanning
-* AFGT= Score fra forvarets kvalifiseringstest
+**I datasettet er variablene oppgitt på engelsk:** \* Heights = høyde
+oppgitt i tommer \* Income = Oppgir årlig inntekt. Det er gjort et
+gjennomsnitt for å presentere topp 2% høyeste inntekt. \* Weight =
+Oppgir vekt i enheten pounds \* Age = Oppgir alder i antall år fra 47
+til 56 år. \* Martial = Oppgir sivilstatus \* Sex = Kjønn. Mann/Kvinne
+\* Education = Oppgir antall år utdanning \* AFGT= Score fra forvarets
+kvalifiseringstest
 
 ## Forklarende dataanalyse
 
-Til å begynne med lages tre nye variabler som settes til en metrisk standard.
+Til å begynne med lages tre nye variabler som settes til en metrisk
+standard.
 
 ```{r}
 hoyde <- hoyde %>%
@@ -95,29 +169,35 @@ ggplot(data = hoyde, aes(x = inntekt)) +
   
 ```
 
-- **Forklaring på utliggerne langt til høyre**
+-   **Forklaring på utliggerne langt til høyre**
 
-Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt.
-For å forklare dette bedre kan vi begynne med å finne maksimumsverdien av variablen *inntekt*.
+Utliggeren til høyre viser gjennomsnittet av 2% topp inntekt. For å
+forklare dette bedre kan vi begynne med å finne maksimumsverdien av
+variablen *inntekt*.
 
 ```{r}
 summary(hoyde)
 ```
 
-Fra summeringstabellen ser vi at maksimumsverdien til variablen *inntekt* er 343,830. Videre kan vi undersøke hvor mange av observasjonene
-som innehar denne verdien.
+Fra summeringstabellen ser vi at maksimumsverdien til variablen
+*inntekt* er 343,830. Videre kan vi undersøke hvor mange av
+observasjonene som innehar denne verdien.
 
 ```{r}
 sum(hoyde$income == 343830)
 ```
 
-Totalt var det 7006 observasjoner og med hensyn til at 143 hadde maksimumsverdien og at det er en relativt stor avstand mellom maksinntekten og medianen til datasettet, kan vi si at utliggerne til høyere representerer et gjennomsnitt av ca. 2% av det totale utvalget.
+Totalt var det 7006 observasjoner og med hensyn til at 143 hadde
+maksimumsverdien og at det er en relativt stor avstand mellom
+maksinntekten og medianen til datasettet, kan vi si at utliggerne til
+høyere representerer et gjennomsnitt av ca. 2% av det totale utvalget.
 
 ```{r}
 (143/7006)*100
 ```
 
-Dersom datasettet reduseres for topp 2% høyeste inntekt og inntekt lik 0, ser histogrammet slik ut:
+Dersom datasettet reduseres for topp 2% høyeste inntekt og inntekt lik
+0, ser histogrammet slik ut:
 
 ```{r}
 hoyde_begr <- hoyde %>%
@@ -130,11 +210,14 @@ ggplot(data = hoyde_begr, aes(x = inntekt)) +
   geom_histogram()
 ```
 
-- **Har vi med personer uten inntekt i datasettet?**
+-   **Har vi med personer uten inntekt i datasettet?**
 
-Ja. Datasettet inneholder observasjoner av en rekke individer uten inntekt. Dette fremkommer av histogrammet til variabelen inntekt hvor $<1500$ er frekvensen til 0 langs x-aksen.
-Det fremkommer også av hoyde-summeringstabellen at minimumsverdien til inntekt-variabelen er 0.
-Dersom vi ønsker å finne ut hvor mange av de observerte som innehar denne verdien, kan vi benytte følgende:
+Ja. Datasettet inneholder observasjoner av en rekke individer uten
+inntekt. Dette fremkommer av histogrammet til variabelen inntekt hvor
+$<1500$ er frekvensen til 0 langs x-aksen. Det fremkommer også av
+hoyde-summeringstabellen at minimumsverdien til inntekt-variabelen er 0.
+Dersom vi ønsker å finne ut hvor mange av de observerte som innehar
+denne verdien, kan vi benytte følgende:
 
 ```{r}
 sum(hoyde$income == 0)
@@ -153,8 +236,8 @@ lm1 <- lm(mod1, data = hoyde, subset = complete.cases(hoyde))
 summary (lm1)
 ```
 
-* Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med 1 cm. 
-Test:
+-   Her ser man at inntekt øker med 10047.9 kr dersom høyde øker med
+    1 cm. Test:
 
 ```{r}
 -1361001.0 + (10047.9 * 185)
@@ -168,12 +251,15 @@ mod2 <- "inntekt ~ hoyde_cm + vekt_kg"
 lm2 <- lm(mod2, data = hoyde, subset = complete.cases(hoyde))
 ```
 
-
 ```{r}
 summary(lm2)
 ```
 
-Fra regresjonsanalysen over ser man inntekt øker ved økt høyde, men synker ved økning i vekt. Dersom høyde økes med 1 cm og vekt samtidig øker med 1 kg, vil også inntekten øke. Dette skyldes at inntekten øker betydelig mer ved økning i høyde, enn den syker ved tilsvarende økning i vekt.
+Fra regresjonsanalysen over ser man inntekt øker ved økt høyde, men
+synker ved økning i vekt. Dersom høyde økes med 1 cm og vekt samtidig
+øker med 1 kg, vil også inntekten øke. Dette skyldes at inntekten øker
+betydelig mer ved økning i høyde, enn den syker ved tilsvarende økning i
+vekt.
 
 ## Regresjonsanalyse: inntekt, høyde, vekt & BMI
 
@@ -186,12 +272,14 @@ lm3 <- lm(mod3, data = hoyde, subset = complete.cases(hoyde))
 summary(lm3)
 ```
 
-Videre fremkommer det at en kombinasjon av økning i høyde, vekt og BMI, også vil gi en økning i innekt.
-
+Videre fremkommer det at en kombinasjon av økning i høyde, vekt og BMI,
+også vil gi en økning i innekt.
 
 ## Forenklet utgave av variablen martial
 
-Siden dummyvariabel *marital* innholdt hele 5 ulike faktorer, så forenkles denne til enten "True" eller "False" for om individet er gift eller ikke-gift. 
+Siden dummyvariabel *marital* innholdt hele 5 ulike faktorer, så
+forenkles denne til enten "True" eller "False" for om individet er gift
+eller ikke-gift.
 
 ```{r}
 hoyde <- hoyde %>%
@@ -214,7 +302,8 @@ huxreg(list("mod1" = lm1, "mod2" = lm2, "mod3" = lm3),
        )
 ```
 
-Huwreg modellen over viser en samlet fremstilling av de presenterte modellene.
+Huwreg modellen over viser en samlet fremstilling av de presenterte
+modellene.
 
 ## Modell med interaksjonsvariabel
 
@@ -226,7 +315,8 @@ lm4 <- lm(mod4, data = hoyde)
 summary(lm4)
 ```
 
-Fra analysen fremkommer det at dummyvariabelen for sexfemale og interaksjonsvariablene er signifikant.
+Fra analysen fremkommer det at dummyvariabelen for sexfemale og
+interaksjonsvariablene er signifikant.
 
 ## Modell med flere variasjonsvariabler
 
@@ -242,11 +332,10 @@ summary(lm5)
 linearHypothesis(lm4, c("sexfemale = 0", "sexfemale:hoyde_cm = 0"))
 ```
 
-
-
 ## Tester endelig modell med redusert datasett
 
-Videre utformes den endelige modellen ved datasett redusert for topp 2% inntekt og inntekt lik 0.
+Videre utformes den endelige modellen ved datasett redusert for topp 2%
+inntekt og inntekt lik 0.
 
 ```{r}
 mod5 <- "inntekt ~ hoyde_cm + vekt_kg + BMI"
@@ -262,6 +351,7 @@ hoyde_begr <- hoyde %>%
 hoyde_begr %>% 
   head(n=10)
 ```
+
 ## Samtlige observasjoner
 
 ```{r}
@@ -274,10 +364,14 @@ ggplot(data = hoyde_begr, mapping = aes(x = hoyde_cm, y = inntekt)) +
   ) + 
   facet_grid(sex ~ factor(married, labels = c("not married", "married")))
 ```
-Videre fremkommer det at en total av residualene motsier den endelige modellen, og at høyde ikke nødvendigvis har en reell påvirkning på inntekt. 
 
+Videre fremkommer det at en total av residualene motsier den endelige
+modellen, og at høyde ikke nødvendigvis har en reell påvirkning på
+inntekt.
 
 ## Konklusjon
 
-Fra testene fremkommer det at høyde ikke bestemmer inntekt. Det fremkommer dog at menn tjener mer enn kvinner.
+Fra testene fremkommer det at høyde ikke bestemmer inntekt. Det
+fremkommer dog at menn tjener mer enn kvinner.
 
+# References
