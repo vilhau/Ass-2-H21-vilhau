@@ -113,6 +113,7 @@ library(tinytex)
 library(tidyverse)
 library(ggpubr)
 library(huxtable)
+library(car)
 options(scipen = 999)
 ```
 
@@ -374,4 +375,4 @@ inntekt.
 Fra testene fremkommer det at høyde ikke bestemmer inntekt. Det
 fremkommer dog at menn tjener mer enn kvinner.
 
-# References
+# Referanser
