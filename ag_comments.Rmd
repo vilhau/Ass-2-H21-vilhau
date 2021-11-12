@@ -4,4 +4,8 @@ output: html_notebook
 ---
 
 -   Reproduserbart som html og pdf uten noen endringer. Flott!
--   
+-   Dere skriver godt! Gjort enkelte rettelser av skrivefeil (prøv den norske ordlisten i RStudio). Gjør det lett å få skrivefeilene bort.
+-   Dummy-variabel, bare to tilfeller 0 eller 1. Har vi mange kategorier er det en faktor-variabel hvor R automatisk lager et helt sett av dummy-variabler for oss.
+-   Se mitt tips i dokumentet om hvordan enklere lage subsett uten NA verdier vha. pipe
+-   Til sist har jeg også lagt inn en interaksjonsmodell uten høyde, vekt etc for å vise at når man korrigerer for kjente variabler som påvirker inntekt så ser det ikke ut som om det i residualene er noen sammenheng mellom inntekt og høyde.
+-    Synes det ble et velskrevet lite paper som dere kan være stolte av
